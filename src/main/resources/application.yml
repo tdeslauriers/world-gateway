@@ -1,0 +1,31 @@
+micronaut:
+  application:
+    name: gateway
+  server:
+    port: 8085
+  http:
+    services:
+      auth:
+        urls:
+          - ${AUTH_SERVICE_URL}
+      gallery:
+        urls:
+          - ${GALLERY_SERVICE_URL}
+      allowance:
+        urls:
+          - ${ALLOWANCE_SERVICE_URL}
+  security:
+    authentication: bearer
+    token:
+      jwt:
+        signatures:
+          secret:
+            validation:
+              secret: ${JWT_GENERATOR_SIGNATURE_SECRET}
+      propagation:
+        enabled: true
+        service-id-regex: "auth|gallery|allowance"
+netty:
+  default:
+    allocator:
+      max-order: 3
