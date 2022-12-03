@@ -1,4 +1,4 @@
-package world.deslauriers.controller;
+package world.deslauriers.controller.auth;
 
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;

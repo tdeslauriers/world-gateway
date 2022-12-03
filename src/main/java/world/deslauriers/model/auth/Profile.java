@@ -21,7 +21,7 @@ public record Profile(
         Boolean accountLocked,
         @Nullable String birthday,
 
-        HashSet<Role> roles,
+        @Nullable HashSet<Role> roles,
         @Nullable HashSet<Address> addresses,
         @Nullable HashSet<Phone> phones
 ) {}
