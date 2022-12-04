@@ -12,6 +12,7 @@ import world.deslauriers.model.auth.LoginResponse;
 
 import javax.validation.Valid;
 
+@Secured(SecurityRule.IS_ANONYMOUS)
 @Controller("/auth")
 public class AuthController {
 
@@ -21,9 +22,9 @@ public class AuthController {
         this.authFetcher = authFetcher;
     }
 
-    @Secured(SecurityRule.IS_ANONYMOUS)
+
     @Post("/login")
-    Mono<LoginResponse> login(@Body @Valid LoginRequest loginRequest){
+    Mono<LoginResponse> login(LoginRequest loginRequest){
 
         return authFetcher.login(loginRequest);
     }
