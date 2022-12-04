@@ -60,4 +60,9 @@ public interface AuthClient extends AuthFetcher{
     @Override
     @Put("/profiles/edit")
     Mono<HttpResponse> updateUser(@Body Profile updateCmd);
+
+    // backup
+    @Override
+    @Get("/backup")
+    Flux<Profile> backupAllUsers();
 }

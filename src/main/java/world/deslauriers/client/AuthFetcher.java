@@ -23,4 +23,7 @@ public interface AuthFetcher {
     Flux<Profile> getAllUsers();
     Mono<Profile> getProfileById(Long id);
     Mono<HttpResponse> updateUser(Profile updateCmd);
+
+    // backup
+    Flux<Profile> backupAllUsers();
 }
