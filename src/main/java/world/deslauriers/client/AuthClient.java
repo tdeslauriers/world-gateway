@@ -6,15 +6,10 @@ import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.http.annotation.Put;
 import io.micronaut.http.client.annotation.Client;
-import io.micronaut.security.annotation.Secured;
-import io.micronaut.security.rules.SecurityRule;
 import reactor.core.publisher.Flux;
-import world.deslauriers.model.auth.*;
 import reactor.core.publisher.Mono;
+import world.deslauriers.model.auth.*;
 
-import javax.validation.Valid;
-
-@Secured(SecurityRule.IS_AUTHENTICATED)
 @Client(id = "auth")
 public interface AuthClient extends AuthFetcher{
 
@@ -60,6 +55,23 @@ public interface AuthClient extends AuthFetcher{
     @Override
     @Put("/profiles/edit")
     Mono<HttpResponse> updateUser(@Body Profile updateCmd);
+
+    // roles
+    @Override
+    @Get("/roles")
+    Flux<Role> getAllRoles();
+
+    @Override
+    @Get("/roles/{id}")
+    Mono<Role> getRoleById(Long id);
+
+    @Override
+    @Put("/roles")
+    Mono<HttpResponse> updateRole(@Body Role role);
+
+    @Override
+    @Post("/roles")
+    Mono<HttpResponse> saveRole(@Body Role role);
 
     // backup
     @Override
