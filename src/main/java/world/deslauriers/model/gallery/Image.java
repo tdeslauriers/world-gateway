@@ -16,8 +16,8 @@ public record Image(
         @Nullable String description,
         String date,
         @NonNull Boolean published,
-        byte[] thumbnail,
-        byte[] image,
+        String thumbnail, // []byte => base64 string from jackson
+        String image, // []byte => base64 string from jackson
 
         Set<AlbumImage> albumImages
 ) {

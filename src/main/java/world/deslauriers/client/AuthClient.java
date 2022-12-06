@@ -1,10 +1,7 @@
 package world.deslauriers.client;
 
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Post;
-import io.micronaut.http.annotation.Put;
+import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -45,7 +42,7 @@ public interface AuthClient extends AuthFetcher{
     Mono<HttpResponse> updateUserProfile(@Body Profile profile);
 
     @Override
-    @Get("/profiles/all")
+    @Get("/profiles")
     Flux<Profile> getAllUsers();
 
     @Override
@@ -72,6 +69,15 @@ public interface AuthClient extends AuthFetcher{
     @Override
     @Post("/roles")
     Mono<HttpResponse> saveRole(@Body Role role);
+
+    // addresses
+    @Override
+    @Delete("/addresses/{id}")
+    Mono<HttpResponse> deleteAddress(Long id);
+
+    @Override
+    @Delete("/addresses/delete/{id}")
+    Mono<HttpResponse> deleteUserAddressById(Long id);
 
     // backup
     @Override

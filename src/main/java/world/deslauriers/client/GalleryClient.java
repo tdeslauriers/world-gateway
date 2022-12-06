@@ -8,10 +8,7 @@ import io.micronaut.http.annotation.Put;
 import io.micronaut.http.client.annotation.Client;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import world.deslauriers.model.gallery.Album;
-import world.deslauriers.model.gallery.Image;
-import world.deslauriers.model.gallery.ImageUpdateCmd;
-import world.deslauriers.model.gallery.Thumbnail;
+import world.deslauriers.model.gallery.*;
 
 @Client(id = "gallery")
 public interface GalleryClient extends GalleryFetcher{
@@ -40,7 +37,7 @@ public interface GalleryClient extends GalleryFetcher{
 
     @Override
     @Get("/albums/{album}")
-    Mono<Album> getAlbumByName(String album);
+    Mono<AlbumDto> getAlbumByName(String album);
 
     @Override
     @Get("/backup")

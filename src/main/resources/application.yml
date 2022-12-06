@@ -3,6 +3,8 @@ micronaut:
     name: gateway
   server:
     port: 8085
+    cors:
+      enabled: true
   http:
     services:
       auth:

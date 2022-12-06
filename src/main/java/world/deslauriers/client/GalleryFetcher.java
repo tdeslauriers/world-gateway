@@ -3,10 +3,7 @@ package world.deslauriers.client;
 import io.micronaut.http.HttpResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import world.deslauriers.model.gallery.Album;
-import world.deslauriers.model.gallery.Image;
-import world.deslauriers.model.gallery.ImageUpdateCmd;
-import world.deslauriers.model.gallery.Thumbnail;
+import world.deslauriers.model.gallery.*;
 
 public interface GalleryFetcher {
 
@@ -18,7 +15,7 @@ public interface GalleryFetcher {
 
     // albums
     Flux<Album> getAllAlbums();
-    Mono<Album> getAlbumByName(String album);
+    Mono<AlbumDto> getAlbumByName(String album);
 
     // backup
     Flux<Image> backupImages();
