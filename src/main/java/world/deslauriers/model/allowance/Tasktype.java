@@ -1,6 +1,7 @@
 package world.deslauriers.model.allowance;
 
 import io.micronaut.core.annotation.NonNull;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
 
 import java.util.Set;
@@ -10,7 +11,8 @@ public record Tasktype(
         Long id,
         @NonNull String name,
         @NonNull String cadence,
-        Set<TasktypeAllowance> tasktypeAllowances,
-        Set<Task> tasks
+        @NonNull String category,
+        @Nullable Set<TasktypeAllowance> tasktypeAllowances,
+        @Nullable Set<Task> tasks
 ) {
 }
