@@ -40,6 +40,10 @@ public interface AllowanceClient extends AllowanceFetcher{
     Mono<HttpResponse<Tasktype>> updateTasktype(@Body Tasktype cmd);
 
     @Override
+    @Put("/tasktypes/archive")
+    Mono<HttpResponse<Tasktype>> archiveTasktype(@Body ArchiveCmd cmd);
+
+    @Override
     @Post("/tasktypes/assign")
     Mono<HttpResponse> assignTaskType(@Body AssignTaskCmd cmd);
 

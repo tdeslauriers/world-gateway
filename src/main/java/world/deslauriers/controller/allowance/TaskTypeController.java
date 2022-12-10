@@ -7,8 +7,8 @@ import io.micronaut.security.rules.SecurityRule;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.AllowanceFetcher;
+import world.deslauriers.model.allowance.ArchiveCmd;
 import world.deslauriers.model.allowance.AssignTaskCmd;
-import world.deslauriers.model.allowance.Task;
 import world.deslauriers.model.allowance.TaskDto;
 import world.deslauriers.model.allowance.Tasktype;
 
@@ -46,6 +46,12 @@ public class TaskTypeController {
     @Put
     Mono<HttpResponse<Tasktype>> update(@Body @Valid Tasktype cmd){
         return allowanceFetcher.updateTasktype(cmd);
+    }
+
+    @Secured({"ALLOWANCE_ADMIN"})
+    @Put("/archive")
+    Mono<HttpResponse<Tasktype>> update(@Body ArchiveCmd cmd){
+        return allowanceFetcher.archiveTasktype(cmd);
     }
 
     @Secured({"ALLOWANCE_ADMIN"})
