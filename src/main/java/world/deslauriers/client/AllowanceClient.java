@@ -14,9 +14,10 @@ import world.deslauriers.model.allowance.*;
 public interface AllowanceClient extends AllowanceFetcher{
 
     // allowances
-    @Override
-    @Get("/allowances")
-    Mono<Allowance> getTasksByALlowanceId(Long id);
+//    @Override
+//    @Get("/allowances")
+//    Mono<Allowance> getTasksByALlowanceId(Long id);
+
 
     @Override
     @Post("/allowances")
@@ -29,7 +30,11 @@ public interface AllowanceClient extends AllowanceFetcher{
 
     @Override
     @Get("/tasktypes/{id}")
-    Flux<Tasktype> getTasktypesByAllowanceId(Long id);
+    Mono<Tasktype> getTasktypeById(Long id);
+
+//    @Override
+//    @Get("/tasktypes/{id}")
+//    Flux<Tasktype> getTasktypesByAllowanceId(Long id);
 
     @Override
     @Post("/tasktypes")
@@ -47,14 +52,14 @@ public interface AllowanceClient extends AllowanceFetcher{
     @Post("/tasktypes/assign")
     Mono<HttpResponse> assignTaskType(@Body AssignTaskCmd cmd);
 
-    @Override
-    @Get("/tasktypes/daily/{allowanceId}")
-    Flux<TaskDto> getDailyTasks(Long allowanceId);
+//    @Override
+//    @Get("/tasktypes/daily/{allowanceId}")
+//    Flux<TaskDto> getDailyTasks(Long allowanceId);
 
     // tasks
-    @Override
-    @Get("/tasks/{id}")
-    Mono<TaskDto> getTaskById(Long id);
+//    @Override
+//    @Get("/tasks/{id}")
+//    Mono<TaskDto> getTaskById(Long id);
 
     @Override
     @Put("/tasks/complete")

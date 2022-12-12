@@ -32,9 +32,15 @@ public class TaskTypeController {
 
     @Secured({"ALLOWANCE_ADMIN"})
     @Get("/{id}")
-    Flux<Tasktype> getByAllowanceId(Long id){
-        return allowanceFetcher.getTasktypesByAllowanceId(id);
+    Mono<Tasktype> getById(Long id){
+        return allowanceFetcher.getTasktypeById(id);
     }
+
+//    @Secured({"ALLOWANCE_ADMIN"})
+//    @Get("/{id}")
+//    Flux<Tasktype> getByAllowanceId(Long id){
+//        return allowanceFetcher.getTasktypesByAllowanceId(id);
+//    }
 
     @Secured({"ALLOWANCE_ADMIN"})
     @Post
@@ -60,9 +66,9 @@ public class TaskTypeController {
         return allowanceFetcher.assignTaskType(cmd);
     }
 
-    @Secured({"ALLOWANCE_USER, ALLOWANCE_ADMIN"})
-    @Get("/daily/{allowanceId}")
-    Flux<TaskDto> getDailyTasks(Long allowanceId){
-        return allowanceFetcher.getDailyTasks(allowanceId);
-    }
+//    @Secured({"ALLOWANCE_USER, ALLOWANCE_ADMIN"})
+//    @Get("/daily/{allowanceId}")
+//    Flux<TaskDto> getDailyTasks(Long allowanceId){
+//        return allowanceFetcher.getDailyTasks(allowanceId);
+//    }
 }
