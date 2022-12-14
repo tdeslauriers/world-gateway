@@ -8,10 +8,11 @@ import java.util.Set;
 
 @Serdeable
 public record Tasktype(
-        Long id,
+        @Nullable Long id,
         @NonNull String name,
         @NonNull String cadence,
         @NonNull String category,
+        @NonNull Boolean archived, // jackson changes naming
         @Nullable Set<TasktypeAllowance> tasktypeAllowances,
         @Nullable Set<Task> tasks
 ) {
