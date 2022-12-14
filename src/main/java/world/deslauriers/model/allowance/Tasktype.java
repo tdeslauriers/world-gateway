@@ -16,4 +16,7 @@ public record Tasktype(
         @Nullable Set<TasktypeAllowance> tasktypeAllowances,
         @Nullable Set<Task> tasks
 ) {
+    public Tasktype(@NonNull String name, @NonNull String cadence, @NonNull String category, @NonNull Boolean archived) {
+        this(null, name, cadence, category, archived, null, null);
+    }
 }
