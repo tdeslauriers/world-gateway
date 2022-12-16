@@ -9,7 +9,8 @@ public interface AllowanceFetcher {
 
     // allowances
 //    Mono<Allowance> getTasksByALlowanceId(Long id);
-    Mono<HttpResponse<Allowance>> saveAllownace(Allowance cmd);
+    Flux<Allowance> getAllowances();
+    Mono<HttpResponse<Allowance>> saveAllowance(Allowance cmd);
 
     // tasktypes
     Flux<Tasktype> getAllTasktypes();
@@ -25,7 +26,6 @@ public interface AllowanceFetcher {
 //    Mono<TaskDto> getTaskById(Long id);
     Mono<HttpResponse> updateTaskComplete(CompleteQualityCmd cmd);
     Mono<HttpResponse> updateTaskQuality(CompleteQualityCmd cmd);
-
 
 
 }

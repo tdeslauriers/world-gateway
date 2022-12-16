@@ -17,11 +17,13 @@ public interface AllowanceClient extends AllowanceFetcher{
 //    @Override
 //    @Get("/allowances")
 //    Mono<Allowance> getTasksByALlowanceId(Long id);
-
+    @Override
+    @Get("/allowances")
+    Flux<Allowance> getAllowances();
 
     @Override
     @Post("/allowances")
-    Mono<HttpResponse<Allowance>> saveAllownace(@Body Allowance cmd);
+    Mono<HttpResponse<Allowance>> saveAllowance(@Body Allowance cmd);
 
     // tasktypes
     @Override

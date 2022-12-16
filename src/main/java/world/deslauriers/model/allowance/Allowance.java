@@ -1,6 +1,7 @@
 package world.deslauriers.model.allowance;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
 
 import java.util.Set;
@@ -10,7 +11,7 @@ public record Allowance(
         Long id,
         Double balance,
         Long userId,
-        Set<TasktypeAllowance> tasktypeAllowances,
-        Set<TaskAllowance> taskAllowances
+        @Nullable Set<TasktypeAllowance> tasktypeAllowances,
+        @Nullable Set<TaskAllowance> taskAllowances
 ) {
 }

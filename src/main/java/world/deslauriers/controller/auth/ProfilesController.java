@@ -48,7 +48,7 @@ public class ProfilesController {
         return authFetcher.getAllUsers();
     }
 
-    @Secured({"PROFILE_ADMIN"})
+    @Secured({"PROFILE_ADMIN", "ALLOWANCE_ADMIN"})
     @Get("/{id}")
     Mono<Profile> getById(Long id){
         return authFetcher.getProfileById(id);

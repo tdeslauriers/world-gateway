@@ -3,31 +3,43 @@ package world.deslauriers.controller.allowance;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
+import io.micronaut.http.annotation.Get;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.security.annotation.Secured;
+import io.micronaut.security.rules.SecurityRule;
+import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
-import world.deslauriers.client.AllowanceFetcher;
 import world.deslauriers.model.allowance.Allowance;
+import world.deslauriers.model.allowance.AllowanceDto;
+import world.deslauriers.service.allowance.AllowanceService;
 
 import javax.validation.Valid;
 
-@Secured({"ALLOWANCE_ADMIN", "ALLOWANCE_USER"})
+@Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/allowance/allowances")
 public class AllowanceController {
 
-    protected final AllowanceFetcher allowanceFetcher;
+    protected final AllowanceService allowanceService;
 
-    public AllowanceController(AllowanceFetcher allowanceFetcher) {
-        this.allowanceFetcher = allowanceFetcher;
+    public AllowanceController(AllowanceService allowanceService) {
+        this.allowanceService = allowanceService;
     }
+
 
 //    @Get("/{id}")
 //    Mono<Allowance> getTasksByAllowanceId(Long id){
 //        return allowanceFetcher.getTasksByALlowanceId(id);
 //    }
 
+    @Secured({"ALLOWANCE_ADMIN"})
+    @Get
+    Flux<AllowanceDto> getAll(){
+        return allowanceService.getAll();
+    }
+
+    @Secured({"ALLOWANCE_ADMIN", "ALLOWANCE_USER"})
     @Post
     Mono<HttpResponse<Allowance>> save(@Body @Valid Allowance cmd){
-        return allowanceFetcher.saveAllownace(cmd);
+        return allowanceService.saveAllownace(cmd);
     }
 }
