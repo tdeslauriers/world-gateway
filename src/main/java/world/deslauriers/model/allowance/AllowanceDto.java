@@ -16,10 +16,6 @@ public record AllowanceDto(
         @NonNull @NotBlank @Email @Size(max = 255) String username,
         @NonNull @NotBlank @Size(min = 1, max = 32) String firstname,
         @NonNull @NotBlank @Size(min = 1, max = 32) String lastname,
-        @Nullable String birthday
+        @Nullable Integer age
 ) {
-
-    public AllowanceDto(Long id, @NonNull Double balance) {
-        this(id, balance, null, null, null, null);
-    }
 }

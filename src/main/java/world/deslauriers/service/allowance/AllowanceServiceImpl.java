@@ -9,6 +9,9 @@ import world.deslauriers.client.AuthFetcher;
 import world.deslauriers.model.allowance.Allowance;
 import world.deslauriers.model.allowance.AllowanceDto;
 
+import java.time.LocalDate;
+import java.time.Period;
+
 @Singleton
 public class AllowanceServiceImpl implements AllowanceService{
 
@@ -24,15 +27,20 @@ public class AllowanceServiceImpl implements AllowanceService{
     public Flux<AllowanceDto> getAll() {
         return allowanceFetcher
                 .getAllowances()
-                .flatMap(allowance -> authFetcher
+                .flatMap(allowance -> {
+                    return authFetcher
                             .getProfileById(allowance.userId())
-                            .map(profile -> new AllowanceDto(
-                                    allowance.id(),
-                                    allowance.balance(),
-                                    profile.username(),
-                                    profile.firstname(),
-                                    profile.lastname(),
-                                    profile.birthday())));
+                            .map(profile -> {
+                                var age = Period.between(LocalDate.parse(profile.birthday()), LocalDate.now());
+                                return new AllowanceDto(
+                                        allowance.id(),
+                                        allowance.balance(),
+                                        profile.username(),
+                                        profile.firstname(),
+                                        profile.lastname(),
+                                        age.getYears());
+                            });
+                });
     }
 
     @Override
