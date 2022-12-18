@@ -35,6 +35,6 @@ public interface AuthFetcher {
     Mono<HttpResponse> deleteUserAddressById(Long id);
     
     // backup
-    Flux<Profile> backupAllUsers();
+    Flux<User> backupAllUsers();
 
 }

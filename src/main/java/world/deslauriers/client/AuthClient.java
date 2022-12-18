@@ -82,5 +82,5 @@ public interface AuthClient extends AuthFetcher{
     // backup
     @Override
     @Get("/backup")
-    Flux<Profile> backupAllUsers();
+    Flux<User> backupAllUsers();
 }

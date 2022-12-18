@@ -6,7 +6,7 @@ import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import reactor.core.publisher.Flux;
 import world.deslauriers.client.AuthFetcher;
-import world.deslauriers.model.auth.Profile;
+import world.deslauriers.model.auth.User;
 
 @Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/auth/backup")
@@ -20,7 +20,7 @@ public class BackupController {
 
     @Secured({"COLD_STORAGE"})
     @Get
-    Flux<Profile> backup(){
+    Flux<User> backup(){
         return authFetcher.backupAllUsers();
     }
 }
