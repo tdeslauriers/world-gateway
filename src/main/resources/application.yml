@@ -6,6 +6,8 @@ micronaut:
     cors:
       enabled: true
   http:
+    client:
+      read-timeout: 30s
     services:
       auth:
         urls:

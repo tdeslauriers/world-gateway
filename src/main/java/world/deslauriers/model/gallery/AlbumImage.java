@@ -8,6 +8,6 @@ import io.micronaut.serde.annotation.Serdeable;
 public record AlbumImage(
         Long id,
         @Nullable Album album,
-        @Nullable Image image
+        @JsonIgnore @Nullable Image image
 ) {
 }
