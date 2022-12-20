@@ -7,10 +7,8 @@ import io.micronaut.security.rules.SecurityRule;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.AllowanceFetcher;
-import world.deslauriers.model.allowance.ArchiveCmd;
-import world.deslauriers.model.allowance.AssignTaskCmd;
-import world.deslauriers.model.allowance.TaskDto;
-import world.deslauriers.model.allowance.Tasktype;
+import world.deslauriers.model.allowance.*;
+import world.deslauriers.service.allowance.TasktypeService;
 
 import javax.validation.Valid;
 
@@ -19,21 +17,23 @@ import javax.validation.Valid;
 public class TaskTypeController {
 
     protected final AllowanceFetcher allowanceFetcher;
+    protected final TasktypeService tasktypeService;
 
-    public TaskTypeController(AllowanceFetcher allowanceFetcher) {
+    public TaskTypeController(AllowanceFetcher allowanceFetcher, TasktypeService tasktypeService) {
         this.allowanceFetcher = allowanceFetcher;
+        this.tasktypeService = tasktypeService;
     }
 
     @Secured({"ALLOWANCE_ADMIN"})
     @Get
-    Flux<Tasktype> getAll(){
-        return allowanceFetcher.getAllTasktypes();
+    Flux<TasktypeDto> getAll(){
+        return tasktypeService.getTasktypesAll();
     }
 
     @Secured({"ALLOWANCE_ADMIN"})
     @Get("/{id}")
-    Mono<Tasktype> getById(Long id){
-        return allowanceFetcher.getTasktypeById(id);
+    Mono<TasktypeDto> getById(Long id){
+        return tasktypeService.getTasktypeById(id);
     }
 
 //    @Secured({"ALLOWANCE_ADMIN"})
