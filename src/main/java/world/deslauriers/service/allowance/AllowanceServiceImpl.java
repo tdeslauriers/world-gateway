@@ -35,6 +35,7 @@ public class AllowanceServiceImpl implements AllowanceService{
                                 return new AllowanceDto(
                                         allowance.id(),
                                         allowance.balance(),
+                                        profile.uuid(),
                                         profile.username(),
                                         profile.firstname(),
                                         profile.lastname(),

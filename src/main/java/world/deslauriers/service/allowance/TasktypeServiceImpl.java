@@ -70,6 +70,7 @@ public class TasktypeServiceImpl implements TasktypeService{
                                     return new AllowanceDto(
                                             tasktypeAllowance.allowance().id(),
                                             tasktypeAllowance.allowance().balance(),
+                                            profile.uuid(),
                                             profile.username(),
                                             profile.firstname(),
                                             profile.lastname(),
