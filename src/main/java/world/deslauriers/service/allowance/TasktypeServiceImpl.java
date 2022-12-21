@@ -65,7 +65,7 @@ public class TasktypeServiceImpl implements TasktypeService{
                     .stream()
                     .map(tasktypeAllowance -> {
                         return authFetcher
-                                .getProfileById(tasktypeAllowance.allowance().id())
+                                .getProfileByUuid(tasktypeAllowance.allowance().userUuid())
                                 .map(profile -> {
                                     return new AllowanceDto(
                                             tasktypeAllowance.allowance().id(),

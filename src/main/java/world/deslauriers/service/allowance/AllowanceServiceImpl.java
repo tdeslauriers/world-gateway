@@ -29,7 +29,7 @@ public class AllowanceServiceImpl implements AllowanceService{
                 .getAllowances()
                 .flatMap(allowance -> {
                     return authFetcher
-                            .getProfileById(allowance.userId())
+                            .getProfileByUuid(allowance.userUuid())
                             .map(profile -> {
                                 var age = Period.between(LocalDate.parse(profile.birthday()), LocalDate.now());
                                 return new AllowanceDto(

@@ -20,7 +20,7 @@ public record Profile(
         Boolean accountExpired,
         Boolean accountLocked,
         @Nullable String birthday,
-
+        @Nullable String uuid,
         @Nullable HashSet<Role> roles,
         @Nullable HashSet<Address> addresses,
         @Nullable HashSet<Phone> phones

@@ -10,7 +10,7 @@ import java.util.Set;
 public record Allowance(
         Long id,
         Double balance,
-        Long userId,
+        String userUuid,
         @Nullable Set<TasktypeAllowance> tasktypeAllowances,
         @Nullable Set<TaskAllowance> taskAllowances
 ) {

@@ -21,7 +21,7 @@ public interface AuthFetcher {
     Mono<Profile> getUserProfile();
     Mono<HttpResponse> updateUserProfile(@Body Profile profile);
     Flux<Profile> getAllUsers();
-    Mono<Profile> getProfileById(Long id);
+    Mono<Profile> getProfileByUuid(String uuid);
     Mono<HttpResponse> updateUser(Profile updateCmd);
 
     // roles

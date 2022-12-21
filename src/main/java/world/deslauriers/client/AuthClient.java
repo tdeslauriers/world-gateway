@@ -46,8 +46,8 @@ public interface AuthClient extends AuthFetcher{
     Flux<Profile> getAllUsers();
 
     @Override
-    @Get("/profiles/{id}")
-    Mono<Profile> getProfileById(Long id);
+    @Get("/profiles/{uuid}")
+    Mono<Profile> getProfileByUuid(String uuid);
 
     @Override
     @Put("/profiles/edit")

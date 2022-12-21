@@ -17,6 +17,7 @@ public record User(
         Boolean accountExpired,
         Boolean accountLocked,
         @Nullable String birthday,
+        @Nullable String uuid,
         Set<UserRole> userRoles,
         @Nullable Set<UserAddress> userAddresses,
         @Nullable Set<UserPhone> userPhones
