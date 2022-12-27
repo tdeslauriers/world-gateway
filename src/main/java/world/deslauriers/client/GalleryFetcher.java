@@ -18,6 +18,6 @@ public interface GalleryFetcher {
     Mono<AlbumDto> getAlbumByName(String album);
 
     // backup
-    Flux<Image> backupImages();
+    Flux<Long> listImageIds();
 
 }

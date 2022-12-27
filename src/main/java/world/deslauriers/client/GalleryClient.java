@@ -40,6 +40,6 @@ public interface GalleryClient extends GalleryFetcher{
     Mono<AlbumDto> getAlbumByName(String album);
 
     @Override
-    @Get("/backup")
-    Flux<Image> backupImages();
+    @Get("/backup/list")
+    Flux<Long> listImageIds();
 }

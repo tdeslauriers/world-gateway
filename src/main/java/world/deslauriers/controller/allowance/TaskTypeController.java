@@ -44,26 +44,20 @@ public class TaskTypeController {
 
     @Secured({"ALLOWANCE_ADMIN"})
     @Post
-    Mono<HttpResponse<Tasktype>> save(@Body Tasktype cmd){
-        return allowanceFetcher.saveTasktype(cmd);
+    Mono<HttpResponse<TasktypeDto>> save(@Body @Valid TasktypeDto cmd){
+        return tasktypeService.saveTasktype(cmd);
     }
 
     @Secured({"ALLOWANCE_ADMIN"})
     @Put
-    Mono<HttpResponse<Tasktype>> update(@Body @Valid Tasktype cmd){
-        return allowanceFetcher.updateTasktype(cmd);
+    Mono<HttpResponse<TasktypeDto>> update(@Body @Valid TasktypeDto cmd){
+        return tasktypeService.updateTasktype(cmd);
     }
 
     @Secured({"ALLOWANCE_ADMIN"})
     @Put("/archive")
     Mono<HttpResponse<Tasktype>> update(@Body ArchiveCmd cmd){
         return allowanceFetcher.archiveTasktype(cmd);
-    }
-
-    @Secured({"ALLOWANCE_ADMIN"})
-    @Post("/assign")
-    Mono<HttpResponse> assignTask(@Body @Valid AssignTaskCmd cmd){
-        return allowanceFetcher.assignTaskType(cmd);
     }
 
 //    @Secured({"ALLOWANCE_USER, ALLOWANCE_ADMIN"})

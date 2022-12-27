@@ -17,8 +17,8 @@ public class BackupController {
         this.galleryFetcher = galleryFetcher;
     }
 
-    @Get
-    Flux<Image> backupImages(){
-        return galleryFetcher.backupImages();
+    @Get("/list")
+    Flux<Long> listImageIds(){
+        return galleryFetcher.listImageIds();
     }
 }

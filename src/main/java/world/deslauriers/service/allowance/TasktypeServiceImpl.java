@@ -1,14 +1,12 @@
 package world.deslauriers.service.allowance;
 
+import io.micronaut.http.HttpResponse;
 import jakarta.inject.Singleton;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.AllowanceFetcher;
 import world.deslauriers.client.AuthFetcher;
-import world.deslauriers.model.allowance.AllowanceDto;
-import world.deslauriers.model.allowance.Tasktype;
-import world.deslauriers.model.allowance.TasktypeAllowance;
-import world.deslauriers.model.allowance.TasktypeDto;
+import world.deslauriers.model.allowance.*;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -58,29 +56,76 @@ public class TasktypeServiceImpl implements TasktypeService{
                 });
     }
 
+    @Override
+    public Mono<HttpResponse<TasktypeDto>> updateTasktype(TasktypeDto cmd) {
+        var taskTypeAllowances = new HashSet<TasktypeAllowance>();
+        if (cmd.allowances() != null && cmd.allowances().size() > 0){
+            cmd.allowances().forEach(allowanceDto -> {
+                var a = new Allowance(allowanceDto.id(), allowanceDto.balance(), allowanceDto.userUuid());
+                taskTypeAllowances.add(new TasktypeAllowance(a));
+            });
+        }
+        return allowanceFetcher.updateTasktype(new Tasktype(cmd.id(), cmd.name(), cmd.cadence(), cmd.category(), cmd.archived(), taskTypeAllowances))
+                .map(tasktypeHttpResponse -> {
+                    var dto = new TasktypeDto(
+                            tasktypeHttpResponse.body().id(),
+                            tasktypeHttpResponse.body().name(),
+                            tasktypeHttpResponse.body().cadence(),
+                            tasktypeHttpResponse.body().category(),
+                            tasktypeHttpResponse.body().archived(),
+                            collectAllowances(tasktypeHttpResponse.body())
+                    );
+                    return HttpResponse.ok(dto);
+                });
+    }
+
+    @Override
+    public Mono<HttpResponse<TasktypeDto>> saveTasktype(TasktypeDto cmd) {
+        var taskTypeAllowances = new HashSet<TasktypeAllowance>();
+        if (cmd.allowances() != null && cmd.allowances().size() > 0){
+            cmd.allowances().forEach(allowanceDto -> {
+                var a = new Allowance(allowanceDto.id(), allowanceDto.balance(), allowanceDto.userUuid());
+                taskTypeAllowances.add(new TasktypeAllowance(a));
+            });
+        }
+        return allowanceFetcher.saveTasktype(new Tasktype(cmd.name(), cmd.cadence(), cmd.category(), cmd.archived(), taskTypeAllowances))
+                .map(tasktypeHttpResponse -> {
+                    var dto = new TasktypeDto(
+                            tasktypeHttpResponse.body().id(),
+                            tasktypeHttpResponse.body().name(),
+                            tasktypeHttpResponse.body().cadence(),
+                            tasktypeHttpResponse.body().category(),
+                            tasktypeHttpResponse.body().archived(),
+                            collectAllowances(tasktypeHttpResponse.body())
+                    );
+                    return HttpResponse.created(dto);
+                });
+    }
+
     private HashSet<AllowanceDto> collectAllowances(Tasktype tasktype){
         var allowances = new HashSet<AllowanceDto>();
         if (tasktype.tasktypeAllowances() != null) {
-            var a = Flux.fromStream(tasktype.tasktypeAllowances()
-                    .stream()
-                    .map(tasktypeAllowance -> {
-                        return authFetcher
-                                .getProfileByUuid(tasktypeAllowance.allowance().userUuid())
-                                .map(profile -> {
-                                    return new AllowanceDto(
-                                            tasktypeAllowance.allowance().id(),
-                                            tasktypeAllowance.allowance().balance(),
-                                            profile.uuid(),
-                                            profile.username(),
-                                            profile.firstname(),
-                                            profile.lastname(),
-                                            Period.between(LocalDate.parse(profile.birthday()), LocalDate.now()).getYears()
-                                    );
-                                })
-                                .block();
-                    }))
-                    .doOnNext(allowances::add)
-                    .blockLast();
+            Flux.fromStream(tasktype
+                .tasktypeAllowances()
+                .stream()
+                .map(tasktypeAllowance -> {
+                    return authFetcher
+                            .getProfileByUuid(tasktypeAllowance.allowance().userUuid())
+                            .map(profile -> {
+                                return new AllowanceDto(
+                                        tasktypeAllowance.allowance().id(),
+                                        tasktypeAllowance.allowance().balance(),
+                                        profile.uuid(),
+                                        profile.username(),
+                                        profile.firstname(),
+                                        profile.lastname(),
+                                        Period.between(LocalDate.parse(profile.birthday()), LocalDate.now()).getYears()
+                                );
+                            })
+                            .block();
+            }))
+            .doOnNext(allowances::add)
+            .blockLast();
         }
         return allowances;
     }

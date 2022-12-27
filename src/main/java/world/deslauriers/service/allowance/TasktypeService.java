@@ -1,5 +1,6 @@
 package world.deslauriers.service.allowance;
 
+import io.micronaut.http.HttpResponse;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.model.allowance.Tasktype;
@@ -9,4 +10,8 @@ public interface TasktypeService {
     Flux<TasktypeDto> getTasktypesAll();
 
     Mono<TasktypeDto> getTasktypeById(Long id);
+
+    Mono<HttpResponse<TasktypeDto>> updateTasktype(TasktypeDto cmd);
+
+    Mono<HttpResponse<TasktypeDto>> saveTasktype(TasktypeDto cmd);
 }

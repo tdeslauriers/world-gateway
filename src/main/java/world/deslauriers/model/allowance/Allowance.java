@@ -14,4 +14,7 @@ public record Allowance(
         @Nullable Set<TasktypeAllowance> tasktypeAllowances,
         @Nullable Set<TaskAllowance> taskAllowances
 ) {
+    public Allowance(Long id, Double balance, String userUuid) {
+        this(id, balance, userUuid, null, null);
+    }
 }

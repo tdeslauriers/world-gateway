@@ -5,8 +5,11 @@ import io.micronaut.serde.annotation.Serdeable;
 
 @Serdeable
 public record TasktypeAllowance(
-        Long id,
+        @Nullable Long id,
         @Nullable Tasktype tasktype,
         Allowance allowance
 ) {
+    public TasktypeAllowance(Allowance allowance) {
+        this(null, null, allowance);
+    }
 }

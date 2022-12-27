@@ -19,7 +19,7 @@ public interface AllowanceFetcher {
     Mono<HttpResponse<Tasktype>> saveTasktype(Tasktype cmd);
     Mono<HttpResponse<Tasktype>> updateTasktype(Tasktype cmd);
     Mono<HttpResponse<Tasktype>> archiveTasktype(ArchiveCmd cmd);
-    Mono<HttpResponse> assignTaskType(AssignTaskCmd cmd);
+
 //    Flux<TaskDto> getDailyTasks(Long allowanceId);
 
     // tasks
