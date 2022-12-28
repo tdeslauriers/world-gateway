@@ -1,11 +1,9 @@
 package world.deslauriers.model.gallery;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
 import io.micronaut.core.annotation.NonNull;
 import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
 
-import java.time.LocalDate;
 import java.util.Set;
 
 @Serdeable

@@ -9,8 +9,10 @@ public interface GalleryFetcher {
 
     // Images
     Mono<Image> getImage(String filename);
+    Mono<FullResolutionDto> getFullResolution(String filename);
     Flux<Thumbnail> getAllUnpublished();
     Mono<HttpResponse> updateImage(ImageUpdateCmd imageUpdateCmd);
+
     Mono<HttpResponse> deleteImage(String filename);
 
     // albums
@@ -19,5 +21,4 @@ public interface GalleryFetcher {
 
     // backup
     Flux<Long> listImageIds();
-
 }

@@ -19,6 +19,10 @@ public interface GalleryClient extends GalleryFetcher{
     Mono<Image> getImage(String filename);
 
     @Override
+    @Get("/images/fullresolution/{filename}")
+    Mono<FullResolutionDto> getFullResolution(String filename);
+
+    @Override
     @Get("/images/unpublished")
     Flux<Thumbnail> getAllUnpublished();
 

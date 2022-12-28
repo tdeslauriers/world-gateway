@@ -7,6 +7,7 @@ import io.micronaut.security.rules.SecurityRule;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.GalleryFetcher;
+import world.deslauriers.model.gallery.FullResolutionDto;
 import world.deslauriers.model.gallery.Image;
 import world.deslauriers.model.gallery.ImageUpdateCmd;
 import world.deslauriers.model.gallery.Thumbnail;
@@ -24,10 +25,16 @@ public class ImageController {
         this.galleryFetcher = galleryFetcher;
     }
 
-    @Secured({"GALLERY_READ", "GALLERY_EDIT"})
+    @Secured({"GALLERY_READ", "GALLERY_EDIT", "COLD_STORAGE"})
     @Get("/{filename}")
     Mono<Image> getImage(String filename){
         return galleryFetcher.getImage(filename);
+    }
+
+    @Secured({"GALLERY_READ", "GALLERY_EDIT", "COLD_STORAGE"})
+    @Get("/fullresolution/{filename}")
+    Mono<FullResolutionDto> getFullResolution(String filename){
+        return galleryFetcher.getFullResolution(filename);
     }
 
     @Secured({"GALLERY_EDIT"})
