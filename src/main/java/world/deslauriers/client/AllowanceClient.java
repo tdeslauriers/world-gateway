@@ -50,14 +50,12 @@ public interface AllowanceClient extends AllowanceFetcher{
     @Put("/tasktypes/archive")
     Mono<HttpResponse<Tasktype>> archiveTasktype(@Body ArchiveCmd cmd);
 
-//    @Override
-//    @Get("/tasktypes/daily/{allowanceId}")
-//    Flux<TaskDto> getDailyTasks(Long allowanceId);
+
 
     // tasks
-//    @Override
-//    @Get("/tasks/{id}")
-//    Mono<TaskDto> getTaskById(Long id);
+    @Override
+    @Get("/tasks/daily")
+    Flux<TaskDto> getDailyTasks();
 
     @Override
     @Put("/tasks/complete")
