@@ -18,4 +18,7 @@ public record TasktypeDto(
         @NonNull Boolean archived,
         @Nullable Set<AllowanceDto> allowances
 ) {
+    public TasktypeDto(@Nullable Long id, @NonNull String name, @NonNull String cadence, @NonNull String category, @NonNull Boolean archived) {
+        this(id, name, cadence, category, archived, null);
+    }
 }

@@ -1,16 +1,23 @@
 package world.deslauriers.service.allowance;
 
+import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.client.HttpClient;
+import io.micronaut.http.client.annotation.Client;
+import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.AllowanceFetcher;
 import world.deslauriers.client.AuthFetcher;
 import world.deslauriers.model.allowance.*;
+import world.deslauriers.model.auth.Profile;
 
 import java.time.LocalDate;
 import java.time.Period;
+import java.util.ArrayList;
 import java.util.HashSet;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Singleton
@@ -18,6 +25,10 @@ public class TasktypeServiceImpl implements TasktypeService{
 
     private final AllowanceFetcher allowanceFetcher;
     private final AuthFetcher authFetcher;
+
+    @Inject
+    @Client("auth")
+    HttpClient client;
 
 
     public TasktypeServiceImpl(AllowanceFetcher allowanceFetcher, AuthFetcher authFetcher) {
@@ -28,8 +39,7 @@ public class TasktypeServiceImpl implements TasktypeService{
     @Override
     public Flux<TasktypeDto> getTasktypesAll(){
 
-        return allowanceFetcher
-                .getAllTasktypes()
+        return allowanceFetcher.getAllTasktypes()
                 .map(tasktype -> {
                     return new TasktypeDto(
                             tasktype.id(),
@@ -37,7 +47,8 @@ public class TasktypeServiceImpl implements TasktypeService{
                             tasktype.cadence(),
                             tasktype.category(),
                             tasktype.archived(),
-                            collectAllowances(tasktype));
+                            collectAllowances(tasktype)
+                    );
                 });
     }
 

@@ -5,19 +5,37 @@ micronaut:
     port: 8085
     cors:
       enabled: true
+  netty:
+    event-loops:
+      other:
+        num-threads: 10
+        prefer-native-transport: true
   http:
     client:
       read-timeout: 30s
+      event-loop-group: other
     services:
       auth:
         urls:
           - ${AUTH_SERVICE_URL}
+        pool:
+          enabled:
+            max-connections: 50
+        read-timeout: 30s
       gallery:
         urls:
           - ${GALLERY_SERVICE_URL}
+        pool:
+          enabled:
+            max-connections: 50
+        read-timeout: 30s
       allowance:
         urls:
           - ${ALLOWANCE_SERVICE_URL}
+        pool:
+          enabled:
+            max-connections: 50
+        read-timeout: 30s
   security:
     authentication: bearer
     token:
