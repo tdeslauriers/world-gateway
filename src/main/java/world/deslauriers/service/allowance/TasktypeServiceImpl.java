@@ -1,6 +1,5 @@
 package world.deslauriers.service.allowance;
 
-import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.annotation.Client;
@@ -11,14 +10,10 @@ import reactor.core.publisher.Mono;
 import world.deslauriers.client.AllowanceFetcher;
 import world.deslauriers.client.AuthFetcher;
 import world.deslauriers.model.allowance.*;
-import world.deslauriers.model.auth.Profile;
 
 import java.time.LocalDate;
 import java.time.Period;
-import java.util.ArrayList;
 import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.Collectors;
 
 @Singleton
 public class TasktypeServiceImpl implements TasktypeService{
