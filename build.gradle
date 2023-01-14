@@ -3,6 +3,10 @@ plugins {
     id("io.micronaut.application") version "${micronautPluginVersion}"
 }
 
+repositories {
+    mavenCentral()
+}
+
 version = "0.1"
 group = "world.deslauriers"
 
@@ -10,8 +14,18 @@ dockerBuild {
     images = ["tdeslauriers/gateway:${project.version}"]
 }
 
-repositories {
-    mavenCentral()
+dockerBuildNative {
+    images = ["tdeslauriers/gateway:${project.version}"]
+}
+
+graalvmNative.toolchainDetection = false
+micronaut {
+    runtime("netty")
+    testRuntime("junit5")
+    processing {
+        incremental(true)
+        annotations("world.deslauriers.*")
+    }
 }
 
 dependencies {
@@ -43,15 +57,7 @@ java {
     targetCompatibility = JavaVersion.toVersion("17")
 }
 
-graalvmNative.toolchainDetection = false
-micronaut {
-    runtime("netty")
-    testRuntime("junit5")
-    processing {
-        incremental(true)
-        annotations("world.deslauriers.*")
-    }
-}
+
 
 
 

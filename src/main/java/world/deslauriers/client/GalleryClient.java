@@ -16,7 +16,7 @@ public interface GalleryClient extends GalleryFetcher{
     // images
     @Override
     @Get("/images/{filename}")
-    Mono<Image> getImage(String filename);
+    Mono<Image> getImageByFilename(String filename);
 
     @Override
     @Get("/images/fullresolution/{filename}")
@@ -46,4 +46,8 @@ public interface GalleryClient extends GalleryFetcher{
     @Override
     @Get("/backup/list")
     Flux<Long> listImageIds();
+
+    @Override
+    @Get("/backup/{id}")
+    Mono<Image> getImageById(Long id);
 }

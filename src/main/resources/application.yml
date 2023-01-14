@@ -34,7 +34,7 @@ micronaut:
           - ${ALLOWANCE_SERVICE_URL}
         pool:
           enabled:
-            max-connections: 50
+            max-connections: 5npm0
         read-timeout: 30s
   security:
     authentication: bearer

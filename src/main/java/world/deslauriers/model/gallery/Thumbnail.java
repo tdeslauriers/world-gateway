@@ -10,6 +10,6 @@ public record Thumbnail(
         @Nullable String description,
         String date,
         Boolean published,
-        String thumbnail // []byte => base64 string from jackson
+        byte[] thumbnail // []byte => base64 string from jackson
 ) {
 }

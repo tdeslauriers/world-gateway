@@ -16,20 +16,8 @@ public class BackupServiceImpl implements BackupService{
     }
 
     @Override
-    public Mono<Image> getImageForBackup(String filename){
-        return galleryFetcher.getImage(filename)
-                .map(image -> new Image(
-                        image.id(),
-                        image.filename(),
-                        image.title(),
-                        image.description(),
-                        image.date(),
-                        image.published(),
-                        image.thumbnail(),
-                        image.presentation(),
-                        galleryFetcher.getFullResolution(filename).block().image(),
-                        image.albumImages()
-                ));
+    public Mono<Image> getImageForBackup(Long id){
+        return galleryFetcher.getImageById(id);
     }
 
     @Override

@@ -28,7 +28,7 @@ public class ImageController {
     @Secured({"GALLERY_READ", "GALLERY_EDIT", "COLD_STORAGE"})
     @Get("/{filename}")
     Mono<Image> getImage(String filename){
-        return galleryFetcher.getImage(filename);
+        return galleryFetcher.getImageByFilename(filename);
     }
 
     @Secured({"GALLERY_READ", "GALLERY_EDIT", "COLD_STORAGE"})

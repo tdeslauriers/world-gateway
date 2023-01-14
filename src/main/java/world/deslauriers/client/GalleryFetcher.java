@@ -8,7 +8,7 @@ import world.deslauriers.model.gallery.*;
 public interface GalleryFetcher {
 
     // Images
-    Mono<Image> getImage(String filename);
+    Mono<Image> getImageByFilename(String filename);
     Mono<FullResolutionDto> getFullResolution(String filename);
     Flux<Thumbnail> getAllUnpublished();
     Mono<HttpResponse> updateImage(ImageUpdateCmd imageUpdateCmd);
@@ -21,4 +21,5 @@ public interface GalleryFetcher {
 
     // backup
     Flux<Long> listImageIds();
+    Mono<Image> getImageById(Long id);
 }

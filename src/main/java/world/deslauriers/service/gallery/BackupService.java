@@ -5,7 +5,7 @@ import reactor.core.publisher.Mono;
 import world.deslauriers.model.gallery.Image;
 
 public interface BackupService {
-    Mono<Image> getImageForBackup(String filename);
+    Mono<Image> getImageForBackup(Long id);
 
     Flux<Long> listImageIds();
 }

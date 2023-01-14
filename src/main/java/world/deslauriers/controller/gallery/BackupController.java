@@ -19,12 +19,12 @@ public class BackupController {
     }
 
     @Get("/list")
-    Flux<Long> listImageIds(){
+    Flux<Long> listImageFilenames(){
         return backupService.listImageIds();
     }
 
-    @Get("/{filename}")
-    Mono<Image> getBackupImage(String filename){
-        return backupService.getImageForBackup(filename);
+    @Get(value = "/{id}")
+    Mono<Image> getBackupImage(Long id){
+        return backupService.getImageForBackup(id);
     }
 }
