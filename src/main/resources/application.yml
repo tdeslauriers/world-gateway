@@ -5,6 +5,7 @@ micronaut:
     port: 8085
     cors:
       enabled: true
+    max-request-size: 15MB
   netty:
     event-loops:
       other:
@@ -13,6 +14,7 @@ micronaut:
   http:
     client:
       read-timeout: 30s
+      max-content-length: 15MB
       event-loop-group: other
     services:
       auth:
