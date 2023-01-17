@@ -1,5 +1,6 @@
 package world.deslauriers.model.gallery;
 
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
 
 @Serdeable

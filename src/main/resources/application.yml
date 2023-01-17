@@ -13,7 +13,7 @@ micronaut:
         prefer-native-transport: true
   http:
     client:
-      read-timeout: 30s
+      read-timeout: 60s
       max-content-length: 15MB
       event-loop-group: other
     services:
@@ -23,21 +23,21 @@ micronaut:
         pool:
           enabled:
             max-connections: 50
-        read-timeout: 30s
+        read-timeout: 60s
       gallery:
         urls:
           - ${GALLERY_SERVICE_URL}
         pool:
           enabled:
             max-connections: 50
-        read-timeout: 30s
+        read-timeout: 60s
       allowance:
         urls:
           - ${ALLOWANCE_SERVICE_URL}
         pool:
           enabled:
             max-connections: 5npm0
-        read-timeout: 30s
+        read-timeout: 60s
   security:
     authentication: bearer
     token:
