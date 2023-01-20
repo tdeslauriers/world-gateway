@@ -8,8 +8,8 @@ import java.util.Set;
 public record Task(
         Long id,
         String date,
-        Boolean isComplete,
-        Boolean isQuality,
+        Boolean complete,
+        Boolean satisfactory,
         Tasktype tasktype,
         Set<TaskAllowance> taskAllowances
 ) {

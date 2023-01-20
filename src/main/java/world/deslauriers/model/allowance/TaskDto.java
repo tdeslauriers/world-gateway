@@ -11,7 +11,7 @@ public record TaskDto(
         String cadence,
         String category,
         String date,
-        Boolean isComplete,
-        Boolean isQuality
+        Boolean complete,
+        Boolean satisfactory
 ) {
 }
