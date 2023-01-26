@@ -7,9 +7,10 @@ import java.time.LocalDate;
 @Serdeable
 public record TaskDto(
         Long id,
-        String task,
+        String name,
         String cadence,
         String category,
+        Boolean archived,
         String date,
         Boolean complete,
         Boolean satisfactory

@@ -5,7 +5,7 @@ micronaut:
     port: 8085
     cors:
       enabled: true
-    max-request-size: 15MB
+    max-request-size: 20MB
   netty:
     event-loops:
       other:
@@ -13,8 +13,8 @@ micronaut:
         prefer-native-transport: true
   http:
     client:
-      read-timeout: 180s
-      max-content-length: 15MB
+      read-timeout: 300s
+      max-content-length: 30MB
       event-loop-group: other
     services:
       auth:
@@ -30,7 +30,7 @@ micronaut:
         pool:
           enabled:
             max-connections: 50
-        read-timeout: 180s
+        read-timeout: 300s
       allowance:
         urls:
           - ${ALLOWANCE_SERVICE_URL}
