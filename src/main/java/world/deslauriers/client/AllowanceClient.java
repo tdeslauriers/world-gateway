@@ -14,9 +14,6 @@ import world.deslauriers.model.allowance.*;
 public interface AllowanceClient extends AllowanceFetcher{
 
     // allowances
-//    @Override
-//    @Get("/allowances")
-//    Mono<Allowance> getTasksByALlowanceId(Long id);
     @Override
     @Get("/allowances")
     Flux<Allowance> getAllowances();
@@ -34,10 +31,6 @@ public interface AllowanceClient extends AllowanceFetcher{
     @Get("/tasktypes/{id}")
     Mono<Tasktype> getTasktypeById(Long id);
 
-//    @Override
-//    @Get("/tasktypes/{id}")
-//    Flux<Tasktype> getTasktypesByAllowanceId(Long id);
-
     @Override
     @Post("/tasktypes")
     Mono<HttpResponse<Tasktype>> saveTasktype(@Body Tasktype cmd);
@@ -45,12 +38,6 @@ public interface AllowanceClient extends AllowanceFetcher{
     @Override
     @Put("/tasktypes")
     Mono<HttpResponse<Tasktype>> updateTasktype(@Body Tasktype cmd);
-
-    @Override
-    @Put("/tasktypes/archive")
-    Mono<HttpResponse<Tasktype>> archiveTasktype(@Body ArchiveCmd cmd);
-
-
 
     // tasks
     @Override

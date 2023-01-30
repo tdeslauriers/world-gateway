@@ -36,12 +36,6 @@ public class TaskTypeController {
         return tasktypeService.getTasktypeById(id);
     }
 
-//    @Secured({"ALLOWANCE_ADMIN"})
-//    @Get("/{id}")
-//    Flux<Tasktype> getByAllowanceId(Long id){
-//        return allowanceFetcher.getTasktypesByAllowanceId(id);
-//    }
-
     @Secured({"ALLOWANCE_ADMIN"})
     @Post
     Mono<HttpResponse<TasktypeDto>> save(@Body @Valid TasktypeDto cmd){
@@ -54,15 +48,4 @@ public class TaskTypeController {
         return tasktypeService.updateTasktype(cmd);
     }
 
-    @Secured({"ALLOWANCE_ADMIN"})
-    @Put("/archive")
-    Mono<HttpResponse<Tasktype>> update(@Body ArchiveCmd cmd){
-        return allowanceFetcher.archiveTasktype(cmd);
-    }
-
-//    @Secured({"ALLOWANCE_USER, ALLOWANCE_ADMIN"})
-//    @Get("/daily/{allowanceId}")
-//    Flux<TaskDto> getDailyTasks(Long allowanceId){
-//        return allowanceFetcher.getDailyTasks(allowanceId);
-//    }
 }
