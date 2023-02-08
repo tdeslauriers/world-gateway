@@ -15,8 +15,6 @@ import world.deslauriers.client.AuthFetcher;
 import world.deslauriers.model.auth.Profile;
 
 import javax.validation.Valid;
-import java.security.Principal;
-import java.util.Optional;
 
 @Secured(SecurityRule.IS_AUTHENTICATED)
 @Controller("/auth/profiles")
@@ -48,7 +46,7 @@ public class ProfilesController {
         return authFetcher.getAllUsers();
     }
 
-    @Secured({"PROFILE_ADMIN", "ALLOWANCE_ADMIN"})
+    @Secured({"PROFILE_ADMIN", "PROFILE_READ"})
     @Get("/{uuid}")
     Mono<Profile> getByUuid(String uuid){
         return authFetcher.getProfileByUuid(uuid);
