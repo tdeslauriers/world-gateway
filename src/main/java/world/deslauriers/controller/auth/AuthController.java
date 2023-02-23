@@ -1,6 +1,5 @@
 package world.deslauriers.controller.auth;
 
-import io.micronaut.http.annotation.Body;
 import io.micronaut.http.annotation.Controller;
 import io.micronaut.http.annotation.Post;
 import io.micronaut.security.annotation.Secured;
@@ -9,8 +8,6 @@ import reactor.core.publisher.Mono;
 import world.deslauriers.client.AuthFetcher;
 import world.deslauriers.model.auth.LoginRequest;
 import world.deslauriers.model.auth.LoginResponse;
-
-import javax.validation.Valid;
 
 @Secured(SecurityRule.IS_ANONYMOUS)
 @Controller("/auth")
@@ -25,7 +22,6 @@ public class AuthController {
 
     @Post("/login")
     Mono<LoginResponse> login(LoginRequest loginRequest){
-
         return authFetcher.login(loginRequest);
     }
 }

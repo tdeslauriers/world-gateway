@@ -1,10 +1,7 @@
 package world.deslauriers.controller.auth;
 
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Controller;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Put;
+import io.micronaut.http.annotation.*;
 import io.micronaut.security.annotation.Secured;
 import io.micronaut.security.rules.SecurityRule;
 import org.slf4j.Logger;
@@ -13,6 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.AuthFetcher;
 import world.deslauriers.model.auth.Profile;
+import world.deslauriers.model.auth.ResetPasswordCmd;
 
 import javax.validation.Valid;
 
@@ -39,6 +37,11 @@ public class ProfilesController {
         return authFetcher.updateUserProfile(profile);
     }
 
+    @Post("/reset")
+    Mono<HttpResponse> resetPassword(@Valid ResetPasswordCmd cmd){
+        return authFetcher.resetPassword(cmd);
+    }
+
     // admin
     @Secured({"PROFILE_ADMIN"})
     @Get
@@ -57,4 +60,5 @@ public class ProfilesController {
     Mono<HttpResponse> updateUser(@Body @Valid Profile updateCmd){
         return authFetcher.updateUser(updateCmd);
     }
+
 }

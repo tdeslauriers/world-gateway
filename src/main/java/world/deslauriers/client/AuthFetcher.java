@@ -20,6 +20,7 @@ public interface AuthFetcher {
     // profiles
     Mono<Profile> getUserProfile();
     Mono<HttpResponse> updateUserProfile(@Body Profile profile);
+    Mono<HttpResponse> resetPassword(ResetPasswordCmd cmd);
     Flux<Profile> getAllUsers();
     Mono<Profile> getProfileByUuid(String uuid);
     Mono<HttpResponse> updateUser(Profile updateCmd);

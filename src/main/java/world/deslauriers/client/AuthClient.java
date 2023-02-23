@@ -42,6 +42,10 @@ public interface AuthClient extends AuthFetcher{
     Mono<HttpResponse> updateUserProfile(@Body Profile profile);
 
     @Override
+    @Post("/profiles/reset")
+    Mono<HttpResponse> resetPassword(@Body ResetPasswordCmd cmd);
+
+    @Override
     @Get("/profiles")
     Flux<Profile> getAllUsers();
 
