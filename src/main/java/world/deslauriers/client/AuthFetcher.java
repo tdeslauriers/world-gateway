@@ -1,6 +1,8 @@
 package world.deslauriers.client;
 
+import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.annotation.Body;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -9,7 +11,8 @@ import world.deslauriers.model.auth.*;
 public interface AuthFetcher {
 
     // login
-    Mono<LoginResponse> login(LoginRequest loginRequest);
+    Mono<MutableHttpResponse<?>> login(LoginRequest loginRequest);
+    Mono<MutableHttpResponse<?>> refresh(RefreshTokenCmd cmd);
 
     // registration
     Mono<HttpResponse> register(RegisterCmd registerCmd);
