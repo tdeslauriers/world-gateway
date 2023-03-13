@@ -7,7 +7,7 @@ import java.time.LocalDate;
 @Serdeable
 public record TaskDto(
         Long id,
-        String name,
+        String name, // task name, not allowance name
         String cadence,
         String category,
         Boolean archived,

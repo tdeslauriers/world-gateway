@@ -45,6 +45,10 @@ public interface AllowanceClient extends AllowanceFetcher{
     Flux<TaskDto> getDailyTasks();
 
     @Override
+    @Get("/tasks/daily/{uuid}")
+    Flux<TaskDto> getUserDailyTasks(String uuid);
+
+    @Override
     @Put("/tasks/complete")
     Mono<HttpResponse> updateTaskComplete(@Body CompleteQualityCmd cmd);
 

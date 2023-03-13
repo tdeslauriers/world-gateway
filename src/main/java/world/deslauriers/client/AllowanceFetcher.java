@@ -19,6 +19,7 @@ public interface AllowanceFetcher {
 
     // tasks
     Flux<TaskDto> getDailyTasks();
+    Flux<TaskDto> getUserDailyTasks(String uuid);
     Mono<HttpResponse> updateTaskComplete(CompleteQualityCmd cmd);
     Mono<HttpResponse> updateTaskQuality(CompleteQualityCmd cmd);
 

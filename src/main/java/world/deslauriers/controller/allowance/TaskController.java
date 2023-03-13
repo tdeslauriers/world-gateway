@@ -10,6 +10,7 @@ import io.micronaut.security.authentication.Authentication;
 import io.micronaut.security.rules.SecurityRule;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
+import world.deslauriers.model.allowance.AllowanceDto;
 import world.deslauriers.model.allowance.CompleteQualityCmd;
 import world.deslauriers.model.allowance.TaskDto;
 import world.deslauriers.service.allowance.TaskService;
@@ -30,6 +31,12 @@ public class TaskController {
     @Get("/daily")
     Flux<TaskDto> getDailyTasks(){
         return taskService.getDailyTasks();
+    }
+
+    @Secured({ "ALLOWANCE_ADMIN"})
+    @Get("/inspect")
+    Flux<?> getInspectionTasks(){
+        return taskService.getInspectionTasks();
     }
 
     @Secured({"ALLOWANCE_ADMIN", "ALLOWANCE_USER"})

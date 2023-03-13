@@ -67,10 +67,11 @@ public class TasktypeServiceImpl implements TasktypeService{
         var taskTypeAllowances = new HashSet<TasktypeAllowance>();
         if (cmd.allowances() != null && cmd.allowances().size() > 0){
             cmd.allowances().forEach(allowanceDto -> {
-                var a = new Allowance(allowanceDto.id(), allowanceDto.balance(), allowanceDto.userUuid());
+                var a = new Allowance(allowanceDto.getId(), allowanceDto.getBalance(), allowanceDto.getUserUuid());
                 taskTypeAllowances.add(new TasktypeAllowance(a));
             });
         }
+
         return allowanceFetcher.updateTasktype(new Tasktype(cmd.id(), cmd.name(), cmd.cadence(), cmd.category(), cmd.archived(), taskTypeAllowances))
                 .map(tasktypeHttpResponse -> {
                     var dto = new TasktypeDto(
@@ -90,7 +91,7 @@ public class TasktypeServiceImpl implements TasktypeService{
         var taskTypeAllowances = new HashSet<TasktypeAllowance>();
         if (cmd.allowances() != null && cmd.allowances().size() > 0){
             cmd.allowances().forEach(allowanceDto -> {
-                var a = new Allowance(allowanceDto.id(), allowanceDto.balance(), allowanceDto.userUuid());
+                var a = new Allowance(allowanceDto.getId(), allowanceDto.getBalance(), allowanceDto.getUserUuid());
                 taskTypeAllowances.add(new TasktypeAllowance(a));
             });
         }
