@@ -11,6 +11,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.model.allowance.Allowance;
 import world.deslauriers.model.allowance.AllowanceDto;
+import world.deslauriers.model.allowance.DashboardDto;
 import world.deslauriers.service.allowance.AllowanceService;
 
 import javax.validation.Valid;
@@ -26,15 +27,15 @@ public class AllowanceController {
     }
 
 
-//    @Get("/{id}")
-//    Mono<Allowance> getTasksByAllowanceId(Long id){
-//        return allowanceFetcher.getTasksByALlowanceId(id);
-//    }
-
     @Secured({"ALLOWANCE_ADMIN"})
     @Get
     Flux<AllowanceDto> getAll(){
         return allowanceService.getAll();
+    }
+
+        @Get("/dashboard")
+    Mono<DashboardDto> getAllowanceDashboard(){
+        return allowanceService.getAllowanceDashboard();
     }
 
     @Secured({"ALLOWANCE_ADMIN", "ALLOWANCE_USER"})

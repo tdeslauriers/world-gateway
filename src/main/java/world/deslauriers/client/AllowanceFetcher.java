@@ -10,6 +10,7 @@ public interface AllowanceFetcher {
     // allowances
     Flux<Allowance> getAllowances();
     Mono<HttpResponse<Allowance>> saveAllowance(Allowance cmd);
+    Mono<DashboardDto> getAllowanceDashboard();
 
     // tasktypes
     Flux<Tasktype> getAllTasktypes();

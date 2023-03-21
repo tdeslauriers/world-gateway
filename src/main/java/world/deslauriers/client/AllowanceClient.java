@@ -22,6 +22,10 @@ public interface AllowanceClient extends AllowanceFetcher{
     @Post("/allowances")
     Mono<HttpResponse<Allowance>> saveAllowance(@Body Allowance cmd);
 
+    @Override
+    @Get("/allowances/dashboard")
+    Mono<DashboardDto> getAllowanceDashboard();
+
     // tasktypes
     @Override
     @Get("/tasktypes")

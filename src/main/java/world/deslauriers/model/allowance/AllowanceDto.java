@@ -19,20 +19,11 @@ public class AllowanceDto {
 
         @NonNull
         String userUuid;
-
-        @NonNull
-        @NotBlank
-        @Email
-        @Size(max = 255)
+        @Nullable
         private String username;
 
-        @NonNull
-        @NotBlank
-        @Size(min = 1, max = 32)
         private String firstname;
-        @NonNull
-        @NotBlank
-        @Size(min = 1, max = 32)
+
         private String lastname;
 
         @Nullable
@@ -42,6 +33,11 @@ public class AllowanceDto {
         private Set<TaskDto> tasks;
 
     public AllowanceDto() {
+    }
+
+    public AllowanceDto(@NonNull Double balance, @NonNull String userUuid) {
+        this.balance = balance;
+        this.userUuid = userUuid;
     }
 
     public AllowanceDto(Long id, @NonNull Double balance, @NonNull String userUuid, @NonNull String username, @NonNull String firstname, @NonNull String lastname, @Nullable Integer age) {
@@ -91,30 +87,28 @@ public class AllowanceDto {
         this.userUuid = userUuid;
     }
 
-    @NonNull
+    @Nullable
     public String getUsername() {
         return username;
     }
 
-    public void setUsername(@NonNull String username) {
+    public void setUsername(@Nullable String username) {
         this.username = username;
     }
 
-    @NonNull
     public String getFirstname() {
         return firstname;
     }
 
-    public void setFirstname(@NonNull String firstname) {
+    public void setFirstname(String firstname) {
         this.firstname = firstname;
     }
 
-    @NonNull
     public String getLastname() {
         return lastname;
     }
 
-    public void setLastname(@NonNull String lastname) {
+    public void setLastname(String lastname) {
         this.lastname = lastname;
     }
 
@@ -135,8 +129,6 @@ public class AllowanceDto {
     public void setTasks(@Nullable Set<TaskDto> tasks) {
         this.tasks = tasks;
     }
-
-
 
     @Override
     public String toString() {

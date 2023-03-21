@@ -8,6 +8,7 @@ import world.deslauriers.client.AllowanceFetcher;
 import world.deslauriers.client.AuthFetcher;
 import world.deslauriers.model.allowance.Allowance;
 import world.deslauriers.model.allowance.AllowanceDto;
+import world.deslauriers.model.allowance.DashboardDto;
 
 import java.time.LocalDate;
 import java.time.Period;
@@ -41,6 +42,25 @@ public class AllowanceServiceImpl implements AllowanceService{
                                         profile.lastname(),
                                         age.getYears());
                             });
+                });
+    }
+
+    @Override
+    public Mono<DashboardDto> getAllowanceDashboard() {
+
+        return authFetcher.getUserProfile()
+                .zipWith(allowanceFetcher.getAllowanceDashboard())
+                .map(objects -> {
+                    var profile = objects.getT1();
+                    var metrics = objects.getT2();
+
+                    metrics.setId(profile.id());
+                    metrics.setUsername(profile.username());
+                    metrics.setFirstname(profile.firstname());
+                    metrics.setLastname(profile.lastname());
+                    metrics.setAge(Period.between(LocalDate.parse(profile.birthday()), LocalDate.now()).getYears());
+
+                    return metrics;
                 });
     }
 
