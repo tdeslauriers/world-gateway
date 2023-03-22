@@ -23,7 +23,7 @@ public class DashboardDto extends AllowanceDto{
     private Double percentageSatisfactory;
 
     // assigned
-    Set<Tasktype> assigned; // jackson serialization to hashset gets rid of weird duplication of allowance field.
+    Set<Tasktype> assigned;
 
     public DashboardDto() {
     }
