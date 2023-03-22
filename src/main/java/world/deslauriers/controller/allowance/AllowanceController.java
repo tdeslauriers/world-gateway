@@ -32,8 +32,8 @@ public class AllowanceController {
     Flux<AllowanceDto> getAll(){
         return allowanceService.getAll();
     }
-
-        @Get("/dashboard")
+    @Secured({"ALLOWANCE_USER"})
+    @Get("/dashboard")
     Mono<DashboardDto> getAllowanceDashboard(){
         return allowanceService.getAllowanceDashboard();
     }
