@@ -10,6 +10,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.AuthFetcher;
 import world.deslauriers.model.auth.Profile;
+import world.deslauriers.model.auth.RemoveUserRoleCmd;
 import world.deslauriers.model.auth.ResetPasswordCmd;
 
 import javax.validation.Valid;
@@ -34,6 +35,7 @@ public class ProfilesController {
 
     @Put("/user")
     Mono<HttpResponse> updateUserProfile(Profile profile){
+
         return authFetcher.updateUserProfile(profile);
     }
 
@@ -61,4 +63,10 @@ public class ProfilesController {
         return authFetcher.updateUser(updateCmd);
     }
 
+    // deletes xref which is technically an update and needs a request body.
+    @Secured({"PROFILE_ADMIN"})
+    @Put("/remove/userrole")
+    Mono<HttpResponse> removeUserRole(@Valid RemoveUserRoleCmd cmd){
+        return authFetcher.removeUserRole(cmd);
+    }
 }

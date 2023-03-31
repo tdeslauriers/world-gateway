@@ -27,18 +27,21 @@ public interface AuthFetcher {
     Flux<Profile> getAllUsers();
     Mono<Profile> getProfileByUuid(String uuid);
     Mono<HttpResponse> updateUser(Profile updateCmd);
+    Mono<HttpResponse> removeUserRole(RemoveUserRoleCmd cmd);
 
     // roles
     Flux<Role> getAllRoles();
     Mono<Role> getRoleById(Long id);
     Mono<HttpResponse> updateRole(Role role);
     Mono<HttpResponse> saveRole(Role role);
-    
-    // address 
+    Mono<Void> deleteRole(Long id);
+
+    // address
     Mono<HttpResponse> deleteAddress(Long id);
     Mono<HttpResponse> deleteUserAddressById(Long id);
-    
+
     // backup
     Flux<User> backupAllUsers();
+
 
 }

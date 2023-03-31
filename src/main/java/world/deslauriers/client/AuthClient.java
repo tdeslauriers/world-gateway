@@ -9,6 +9,8 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.model.auth.*;
 
+import javax.validation.Valid;
+
 @Client(id = "auth")
 public interface AuthClient extends AuthFetcher{
 
@@ -64,6 +66,10 @@ public interface AuthClient extends AuthFetcher{
     @Put("/profiles/edit")
     Mono<HttpResponse> updateUser(@Body Profile updateCmd);
 
+    @Override
+    @Put("/profiles/remove/userrole")
+    Mono<HttpResponse> removeUserRole(@Body @Valid RemoveUserRoleCmd cmd);
+
     // roles
     @Override
     @Get("/roles")
@@ -80,6 +86,9 @@ public interface AuthClient extends AuthFetcher{
     @Override
     @Post("/roles")
     Mono<HttpResponse> saveRole(@Body Role role);
+
+    @Delete("/roles/{id}")
+    Mono<Void> deleteRole(Long id);
 
     // addresses
     @Override

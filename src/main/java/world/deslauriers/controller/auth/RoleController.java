@@ -1,6 +1,7 @@
 package world.deslauriers.controller.auth;
 
 import io.micronaut.http.HttpResponse;
+import io.micronaut.http.HttpStatus;
 import io.micronaut.http.annotation.*;
 import io.micronaut.security.annotation.Secured;
 import reactor.core.publisher.Flux;
@@ -39,4 +40,9 @@ public class RoleController {
     Mono<HttpResponse> save(@Body @Valid Role role){
         return authFetcher.saveRole(role);
     }
+
+    @Delete("/{id}")
+    @Status(HttpStatus.NO_CONTENT)
+    Mono<Void> delete(long id){ return authFetcher.deleteRole(id); };
+
 }
