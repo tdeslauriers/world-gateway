@@ -17,12 +17,12 @@ public interface AllowanceFetcher {
     Mono<Tasktype> getTasktypeById(Long id);
     Mono<HttpResponse<Tasktype>> saveTasktype(Tasktype cmd);
     Mono<HttpResponse<Tasktype>> updateTasktype(Tasktype cmd);
+    Mono<HttpResponse> removeTasktypeAllowance(RemoveTasktypeAllowanceCmd cmd);
 
     // tasks
     Flux<TaskDto> getDailyTasks();
     Flux<TaskDto> getUserDailyTasks(String uuid);
     Mono<HttpResponse> updateTaskComplete(CompleteQualityCmd cmd);
     Mono<HttpResponse> updateTaskQuality(CompleteQualityCmd cmd);
-
 
 }

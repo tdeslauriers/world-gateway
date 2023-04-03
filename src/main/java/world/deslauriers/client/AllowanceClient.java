@@ -43,6 +43,10 @@ public interface AllowanceClient extends AllowanceFetcher{
     @Put("/tasktypes")
     Mono<HttpResponse<Tasktype>> updateTasktype(@Body Tasktype cmd);
 
+    @Override
+    @Put("/tasktypes/remove/tasktype/allowance")
+    Mono<HttpResponse> removeTasktypeAllowance(@Body RemoveTasktypeAllowanceCmd cmd);
+
     // tasks
     @Override
     @Get("/tasks/daily")

@@ -109,6 +109,11 @@ public class TasktypeServiceImpl implements TasktypeService{
                 });
     }
 
+    @Override
+    public Mono<HttpResponse> removeTasktypeAllowance(RemoveTasktypeAllowanceCmd cmd) {
+        return allowanceFetcher.removeTasktypeAllowance(cmd);
+    }
+
     private HashSet<AllowanceDto> collectAllowances(Tasktype tasktype){
         var allowances = new HashSet<AllowanceDto>();
         if (tasktype.tasktypeAllowances() != null) {

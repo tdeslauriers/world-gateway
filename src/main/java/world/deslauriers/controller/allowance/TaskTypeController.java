@@ -48,4 +48,9 @@ public class TaskTypeController {
         return tasktypeService.updateTasktype(cmd);
     }
 
+    @Secured({"ALLOWANCE_ADMIN"})
+    @Put("/remove/tasktype/allowance")
+    Mono<HttpResponse> removeTasktypeAllowance(@Body @Valid RemoveTasktypeAllowanceCmd cmd){
+        return tasktypeService.removeTasktypeAllowance(cmd);
+    }
 }

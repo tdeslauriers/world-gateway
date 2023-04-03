@@ -66,7 +66,7 @@ public class ProfilesController {
     // deletes xref which is technically an update and needs a request body.
     @Secured({"PROFILE_ADMIN"})
     @Put("/remove/userrole")
-    Mono<HttpResponse> removeUserRole(@Valid RemoveUserRoleCmd cmd){
+    Mono<HttpResponse> removeUserRole(@Body @Valid RemoveUserRoleCmd cmd){
         return authFetcher.removeUserRole(cmd);
     }
 }
