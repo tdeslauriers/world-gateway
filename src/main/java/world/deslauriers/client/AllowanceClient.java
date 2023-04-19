@@ -64,4 +64,24 @@ public interface AllowanceClient extends AllowanceFetcher{
     @Put("/tasks/quality")
     Mono<HttpResponse> updateTaskQuality(@Body CompleteQualityCmd cmd);
 
+    // backup
+    @Override
+    @Get("/backup/allowances")
+    Flux<BackupAllowance> backupAllowances();
+
+    @Override
+    @Get("/backup/tasktypes")
+    Flux<BackupTasktype> backupTasktypes();
+
+    @Override
+    @Get("/backup/tasks")
+    Flux<BackupTask> backupTasks();
+
+    @Override
+    @Get("/backup/tasktypeAllowances")
+    Flux<BackupTasktypeAllowance> backupTasktypeAllowance();
+
+    @Override
+    @Get("/backup/taskAllowances")
+    Flux<BackupTaskAllowance> backupTaskAllowance();
 }

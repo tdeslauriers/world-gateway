@@ -25,4 +25,11 @@ public interface AllowanceFetcher {
     Mono<HttpResponse> updateTaskComplete(CompleteQualityCmd cmd);
     Mono<HttpResponse> updateTaskQuality(CompleteQualityCmd cmd);
 
+    // backups
+    Flux<BackupAllowance> backupAllowances();
+    Flux<BackupTasktype> backupTasktypes();
+    Flux<BackupTask> backupTasks();
+    Flux<BackupTasktypeAllowance> backupTasktypeAllowance();
+    Flux<BackupTaskAllowance> backupTaskAllowance();
+
 }
