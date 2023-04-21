@@ -4,7 +4,7 @@ import io.micronaut.serde.annotation.Serdeable;
 
 @Serdeable
 public record BackupAllowance(
-        String userId,
+        Long userId,
         String balance,
         String userUuid
 ) {

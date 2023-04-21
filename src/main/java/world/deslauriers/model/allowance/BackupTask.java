@@ -4,7 +4,7 @@ import io.micronaut.serde.annotation.Serdeable;
 
 @Serdeable
 public record BackupTask(
-        String id,
+        Long id,
         String date,
         String complete,
         String satisfactory,

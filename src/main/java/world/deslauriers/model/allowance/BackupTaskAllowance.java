@@ -4,7 +4,7 @@ import io.micronaut.serde.annotation.Serdeable;
 
 @Serdeable
 public record BackupTaskAllowance(
-        String id,
+        Long id,
         String taskId,
         String allowanceId
 ) {
