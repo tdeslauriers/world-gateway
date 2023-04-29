@@ -15,27 +15,27 @@ public class AllowanceBackupServiceImpl implements AllowanceBackupService {
     }
 
     @Override
-    public Flux<BackupAllowance> getAllowanceBackup() {
-        return allowanceFetcher.backupAllowances();
+    public Flux<BackupAllowance> getAllowanceBackup(Long epoch) {
+        return allowanceFetcher.backupAllowances(epoch);
     }
 
     @Override
-    public Flux<BackupTasktype> getTasktypeBackup() {
-        return allowanceFetcher.backupTasktypes();
+    public Flux<BackupTasktype> getTasktypeBackup(Long epoch) {
+        return allowanceFetcher.backupTasktypes(epoch);
     }
 
     @Override
-    public Flux<BackupTask> getTaskBackup() {
-        return allowanceFetcher.backupTasks();
+    public Flux<BackupTask> getTaskBackup(Long epoch) {
+        return allowanceFetcher.backupTasks(epoch);
     }
 
     @Override
-    public Flux<BackupTasktypeAllowance> getTasktypeAlowanceBackups() {
-        return allowanceFetcher.backupTasktypeAllowance();
+    public Flux<BackupTasktypeAllowance> getTasktypeAlowanceBackups(Long epoch) {
+        return allowanceFetcher.backupTasktypeAllowance(epoch);
     }
 
     @Override
-    public Flux<BackupTaskAllowance> getTaskAlowanceBackups() {
-        return allowanceFetcher.backupTaskAllowance();
+    public Flux<BackupTaskAllowance> getTaskAlowanceBackups(Long epoch) {
+        return allowanceFetcher.backupTaskAllowance(epoch);
     }
 }

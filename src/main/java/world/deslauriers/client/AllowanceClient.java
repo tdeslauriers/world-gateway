@@ -66,22 +66,22 @@ public interface AllowanceClient extends AllowanceFetcher{
 
     // backup
     @Override
-    @Get("/backup/allowances")
-    Flux<BackupAllowance> backupAllowances();
+    @Get("/backup/allowances/{epoch}")
+    Flux<BackupAllowance> backupAllowances(Long epoch);
 
     @Override
-    @Get("/backup/tasktypes")
-    Flux<BackupTasktype> backupTasktypes();
+    @Get("/backup/tasktypes/{epoch}")
+    Flux<BackupTasktype> backupTasktypes(Long epoch);
 
     @Override
-    @Get("/backup/tasks")
-    Flux<BackupTask> backupTasks();
+    @Get("/backup/tasks/{epoch}")
+    Flux<BackupTask> backupTasks(Long epoch);
 
     @Override
-    @Get("/backup/tasktypeAllowances")
-    Flux<BackupTasktypeAllowance> backupTasktypeAllowance();
+    @Get("/backup/tasktype_allowances/{epoch}")
+    Flux<BackupTasktypeAllowance> backupTasktypeAllowance(Long epoch);
 
     @Override
-    @Get("/backup/taskAllowances")
-    Flux<BackupTaskAllowance> backupTaskAllowance();
+    @Get("/backup/task_allowances/{epoch}")
+    Flux<BackupTaskAllowance> backupTaskAllowance(Long epoch);
 }

@@ -23,22 +23,28 @@ public class BackupController {
     }
 
 
-    @Get("/allowances")
-    public Flux<BackupAllowance> backupAllowances(){
-        return allowanceBackupService.getAllowanceBackup();
+    @Get("/allowances/{epoch}")
+    public Flux<BackupAllowance> backupAllowances(Long epoch){
+        return allowanceBackupService.getAllowanceBackup(epoch);
     }
 
-    @Get("/tasktypes")
-    public Flux<BackupTasktype> backupTasktypes() {
-        return allowanceBackupService.getTasktypeBackup();
+    @Get("/tasktypes/{epoch}")
+    public Flux<BackupTasktype> backupTasktypes(Long epoch) {
+        return allowanceBackupService.getTasktypeBackup(epoch);
     }
 
-    @Get("/tasks")
-    public Flux<BackupTask> backupTasks(){ return allowanceBackupService.getTaskBackup(); }
+    @Get("/tasks/{epoch}")
+    public Flux<BackupTask> backupTasks(Long epoch){
+        return allowanceBackupService.getTaskBackup(epoch);
+    }
 
-    @Get("/tasktypeAllowances")
-    public Flux<BackupTasktypeAllowance> backupTasktypeAllowance() { return allowanceBackupService.getTasktypeAlowanceBackups(); }
+    @Get("/tasktype_allowances/{epoch}")
+    public Flux<BackupTasktypeAllowance> backupTasktypeAllowance(Long epoch) {
+        return allowanceBackupService.getTasktypeAlowanceBackups(epoch);
+    }
 
-    @Get("/taskAllowances")
-    public Flux<BackupTaskAllowance> backupTaskAllowance() { return allowanceBackupService.getTaskAlowanceBackups(); }
+    @Get("/task_allowances/{epoch}")
+    public Flux<BackupTaskAllowance> backupTaskAllowance(Long epoch) {
+        return allowanceBackupService.getTaskAlowanceBackups(epoch);
+    }
 }

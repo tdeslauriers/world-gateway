@@ -4,13 +4,13 @@ import reactor.core.publisher.Flux;
 import world.deslauriers.model.allowance.*;
 
 public interface AllowanceBackupService {
-    Flux<BackupAllowance> getAllowanceBackup();
+    Flux<BackupAllowance> getAllowanceBackup(Long epoch);
 
-    Flux<BackupTasktype> getTasktypeBackup();
+    Flux<BackupTasktype> getTasktypeBackup(Long epoch);
 
-    Flux<BackupTask> getTaskBackup();
+    Flux<BackupTask> getTaskBackup(Long epoch);
 
-    Flux<BackupTasktypeAllowance> getTasktypeAlowanceBackups();
+    Flux<BackupTasktypeAllowance> getTasktypeAlowanceBackups(Long epoch);
 
-    Flux<BackupTaskAllowance> getTaskAlowanceBackups();
+    Flux<BackupTaskAllowance> getTaskAlowanceBackups(Long epoch);
 }
