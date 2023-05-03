@@ -2,6 +2,7 @@ package world.deslauriers.service.allowance;
 
 import jakarta.inject.Singleton;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import world.deslauriers.client.AllowanceFetcher;
 import world.deslauriers.model.allowance.*;
 
@@ -37,5 +38,10 @@ public class AllowanceBackupServiceImpl implements AllowanceBackupService {
     @Override
     public Flux<BackupTaskAllowance> getTaskAlowanceBackups(Long epoch) {
         return allowanceFetcher.backupTaskAllowance(epoch);
+    }
+
+    @Override
+    public Mono<DeleteRecordsDto> cleanupRecords(Long epoch) {
+        return allowanceFetcher.cleanupRecords(epoch);
     }
 }

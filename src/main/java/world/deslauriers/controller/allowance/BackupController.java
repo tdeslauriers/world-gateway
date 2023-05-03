@@ -6,6 +6,7 @@ import io.micronaut.security.annotation.Secured;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 import world.deslauriers.model.allowance.*;
 import world.deslauriers.service.allowance.AllowanceBackupService;
 
@@ -46,5 +47,10 @@ public class BackupController {
     @Get("/task_allowances/{epoch}")
     public Flux<BackupTaskAllowance> backupTaskAllowance(Long epoch) {
         return allowanceBackupService.getTaskAlowanceBackups(epoch);
+    }
+
+    @Get("/cleanup/{epoch}")
+    public Mono<DeleteRecordsDto> cleanupDeletedAllownaceRecords(Long epoch){
+        return allowanceBackupService.cleanupRecords(epoch);
     }
 }

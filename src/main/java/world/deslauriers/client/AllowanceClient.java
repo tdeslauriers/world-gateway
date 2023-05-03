@@ -84,4 +84,8 @@ public interface AllowanceClient extends AllowanceFetcher{
     @Override
     @Get("/backup/task_allowances/{epoch}")
     Flux<BackupTaskAllowance> backupTaskAllowance(Long epoch);
+
+    @Override
+    @Get("/backup/cleanup/{epoch}")
+    Mono<DeleteRecordsDto> cleanupRecords(Long epoch);
 }
