@@ -103,4 +103,9 @@ public interface AuthClient extends AuthFetcher{
     @Override
     @Get("/backup")
     Flux<User> backupAllUsers();
+
+    // restore
+    @Override
+    @Post("/restore/user")
+    Mono<HttpResponse<?>> restoreUser(BackupUser user);
 }

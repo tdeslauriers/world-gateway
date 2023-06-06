@@ -43,5 +43,6 @@ public interface AuthFetcher {
     // backup
     Flux<User> backupAllUsers();
 
-
+    // restore
+    Mono<HttpResponse<?>> restoreUser(BackupUser user);
 }
