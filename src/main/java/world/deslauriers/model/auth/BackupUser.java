@@ -1,8 +1,7 @@
 package world.deslauriers.model.auth;
 
+import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
-
-import java.time.LocalDate;
 
 @Serdeable
 public record BackupUser(
@@ -11,11 +10,11 @@ public record BackupUser(
         String password,
         String firstname,
         String lastname,
-        LocalDate dateCreated,
+        String dateCreated,
         Boolean enabled,
         Boolean accountExpired,
         Boolean accountLocked,
-        LocalDate birthday,
+        @Nullable String birthday,
         String uuid
 ) {
 }

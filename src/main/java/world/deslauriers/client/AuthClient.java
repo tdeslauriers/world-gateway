@@ -1,6 +1,5 @@
 package world.deslauriers.client;
 
-import io.micronaut.http.HttpRequest;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.MutableHttpResponse;
 import io.micronaut.http.annotation.*;
@@ -107,5 +106,13 @@ public interface AuthClient extends AuthFetcher{
     // restore
     @Override
     @Post("/restore/user")
-    Mono<HttpResponse<?>> restoreUser(BackupUser user);
+    Mono<HttpResponse<?>> restoreUser(@Body BackupUser user);
+
+    @Override
+    @Post("/restore/role")
+    Mono<HttpResponse<?>> restoreRole(@Body BackupRole role);
+
+    @Override
+    @Post("/restore/userrole")
+    Mono<HttpResponse<?>> restoreUserrole(@Body BackupUserrole userrole);
 }

@@ -45,4 +45,8 @@ public interface AuthFetcher {
 
     // restore
     Mono<HttpResponse<?>> restoreUser(BackupUser user);
+
+    Mono<HttpResponse<?>> restoreRole(BackupRole role);
+
+    Mono<HttpResponse<?>> restoreUserrole(BackupUserrole userrole);
 }
