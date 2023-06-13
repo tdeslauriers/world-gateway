@@ -88,4 +88,24 @@ public interface AllowanceClient extends AllowanceFetcher{
     @Override
     @Get("/backup/cleanup/{epoch}")
     Mono<DeleteRecordsDto> cleanupRecords(Long epoch);
+
+    // restore
+    @Override
+    @Post("/restore/allowance")
+    Mono<HttpResponse<?>> restoreAllowance(@Body BackupAllowance backupAllowance);
+
+    @Override
+    @Post("/restore/tasktype")
+    Mono<HttpResponse<?>> restoreTasktype(@Body BackupTasktype backupTasktype);
+    @Override
+    @Post("/restore/task")
+    Mono<HttpResponse<?>> restoreTask(@Body BackupTask backupTask);
+
+    @Override
+    @Post("/restore/tasktype_allowance")
+    Mono<HttpResponse<?>> restoreTasktypeAllowance(@Body BackupTasktypeAllowance backupTasktypeAllowance);
+
+    @Override
+    @Post("/restore/task_allowance")
+    Mono<HttpResponse<?>> restoreTaskAllowance(@Body BackupTaskAllowance backupTaskAllowance);
 }

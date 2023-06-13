@@ -32,4 +32,15 @@ public interface AllowanceFetcher {
     Flux<BackupTasktypeAllowance> backupTasktypeAllowance(Long epoch);
     Flux<BackupTaskAllowance> backupTaskAllowance(Long epoch);
     Mono<DeleteRecordsDto> cleanupRecords(Long epoch);
+
+    // restore
+    Mono<HttpResponse<?>> restoreAllowance(BackupAllowance backupAllowance);
+
+    Mono<HttpResponse<?>> restoreTasktype(BackupTasktype backupTasktype);
+
+    Mono<HttpResponse<?>> restoreTask(BackupTask backupTask);
+
+    Mono<HttpResponse<?>> restoreTasktypeAllowance(BackupTasktypeAllowance backupTasktypeAllowance);
+
+    Mono<HttpResponse<?>> restoreTaskAllowance(BackupTaskAllowance backupTaskAllowance);
 }
