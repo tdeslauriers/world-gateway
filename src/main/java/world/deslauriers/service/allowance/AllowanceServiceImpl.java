@@ -31,16 +31,16 @@ public class AllowanceServiceImpl implements AllowanceService{
                 .flatMap(allowance -> {
                     return authFetcher
                             .getProfileByUuid(allowance.userUuid())
-                            .map(profile -> {
+                            .flatMap(profile -> {
                                 var age = Period.between(LocalDate.parse(profile.birthday()), LocalDate.now());
-                                return new AllowanceDto(
+                                return Mono.just(new AllowanceDto(
                                         allowance.id(),
                                         allowance.balance(),
                                         profile.uuid(),
                                         profile.username(),
                                         profile.firstname(),
                                         profile.lastname(),
-                                        age.getYears());
+                                        age.getYears()));
                             });
                 });
     }
@@ -50,7 +50,7 @@ public class AllowanceServiceImpl implements AllowanceService{
 
         return authFetcher.getUserProfile()
                 .zipWith(allowanceFetcher.getAllowanceDashboard())
-                .map(objects -> {
+                .flatMap(objects -> {
                     var profile = objects.getT1();
                     var metrics = objects.getT2();
 
@@ -60,7 +60,7 @@ public class AllowanceServiceImpl implements AllowanceService{
                     metrics.setLastname(profile.lastname());
                     metrics.setAge(Period.between(LocalDate.parse(profile.birthday()), LocalDate.now()).getYears());
 
-                    return metrics;
+                    return Mono.just(metrics);
                 });
     }
 

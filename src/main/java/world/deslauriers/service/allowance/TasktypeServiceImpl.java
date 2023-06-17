@@ -5,6 +5,8 @@ import io.micronaut.http.client.HttpClient;
 import io.micronaut.http.client.annotation.Client;
 import jakarta.inject.Inject;
 import jakarta.inject.Singleton;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.AllowanceFetcher;
@@ -17,6 +19,8 @@ import java.util.HashSet;
 
 @Singleton
 public class TasktypeServiceImpl implements TasktypeService{
+
+    private static final Logger log = LoggerFactory.getLogger(TasktypeServiceImpl.class);
 
     private final AllowanceFetcher allowanceFetcher;
     private final AuthFetcher authFetcher;
@@ -117,27 +121,19 @@ public class TasktypeServiceImpl implements TasktypeService{
     private HashSet<AllowanceDto> collectAllowances(Tasktype tasktype){
         var allowances = new HashSet<AllowanceDto>();
         if (tasktype.tasktypeAllowances() != null) {
-            Flux.fromStream(tasktype
-                .tasktypeAllowances()
-                .stream()
-                .map(tasktypeAllowance -> {
-                    return authFetcher
-                            .getProfileByUuid(tasktypeAllowance.allowance().userUuid())
-                            .map(profile -> {
-                                return new AllowanceDto(
-                                        tasktypeAllowance.allowance().id(),
-                                        tasktypeAllowance.allowance().balance(),
-                                        profile.uuid(),
-                                        profile.username(),
-                                        profile.firstname(),
-                                        profile.lastname(),
-                                        Period.between(LocalDate.parse(profile.birthday()), LocalDate.now()).getYears()
-                                );
-                            })
-                            .block();
-            }))
-            .doOnNext(allowances::add)
-            .blockLast();
+            Flux.fromStream(tasktype.tasktypeAllowances().stream())
+                    .flatMap(tasktypeAllowance -> authFetcher.getProfileByUuid(tasktypeAllowance.allowance().userUuid())
+                            .map(profile -> new AllowanceDto(
+                                    tasktypeAllowance.allowance().id(),
+                                    tasktypeAllowance.allowance().balance(),
+                                    profile.uuid(),
+                                    profile.username(),
+                                    profile.firstname(),
+                                    profile.lastname(),
+                                    Period.between(LocalDate.parse(profile.birthday()), LocalDate.now()).getYears()
+                            ))
+                            .doOnNext(allowances::add))
+                    .blockLast();
         }
         return allowances;
     }

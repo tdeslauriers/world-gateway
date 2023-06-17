@@ -9,7 +9,7 @@ micronaut:
   netty:
     event-loops:
       other:
-        num-threads: 10
+        num-threads: 30
         prefer-native-transport: true
   http:
     client:
@@ -36,7 +36,7 @@ micronaut:
           - ${ALLOWANCE_SERVICE_URL}
         pool:
           enabled:
-            max-connections: 5npm0
+            max-connections: 50
         read-timeout: 60s
   security:
     authentication: bearer

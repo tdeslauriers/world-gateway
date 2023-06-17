@@ -42,13 +42,14 @@ public class TaskServiceImpl implements TaskService {
     @Override
     public Flux<?> getInspectionTasks() {
         return allowanceService.getAll()
-                .map(allowanceDto -> {
+                .flatMap(allowanceDto -> {
                     var tasks = new HashSet<TaskDto>();
-                    allowanceFetcher.getUserDailyTasks(allowanceDto.getUserUuid())
+                    allowanceFetcher
+                            .getUserDailyTasks(allowanceDto.getUserUuid())
                             .doOnNext(tasks::add)
                             .blockLast();
                     allowanceDto.setTasks(tasks);
-                    return allowanceDto;
+                    return Mono.just(allowanceDto);
                 });
     }
 }

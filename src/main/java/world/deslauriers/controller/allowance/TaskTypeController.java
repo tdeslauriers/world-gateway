@@ -39,6 +39,7 @@ public class TaskTypeController {
     @Secured({"ALLOWANCE_ADMIN"})
     @Post
     Mono<HttpResponse<TasktypeDto>> save(@Body @Valid TasktypeDto cmd){
+
         return tasktypeService.saveTasktype(cmd);
     }
 
