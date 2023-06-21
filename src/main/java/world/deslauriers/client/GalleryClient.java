@@ -1,10 +1,7 @@
 package world.deslauriers.client;
 
 import io.micronaut.http.HttpResponse;
-import io.micronaut.http.annotation.Body;
-import io.micronaut.http.annotation.Delete;
-import io.micronaut.http.annotation.Get;
-import io.micronaut.http.annotation.Put;
+import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
@@ -43,6 +40,7 @@ public interface GalleryClient extends GalleryFetcher{
     @Get("/albums/{album}")
     Mono<AlbumDto> getAlbumByName(String album);
 
+    // backup
     @Override
     @Get("/backup/list")
     Flux<Long> listImageIds();
@@ -50,4 +48,17 @@ public interface GalleryClient extends GalleryFetcher{
     @Override
     @Get("/backup/{id}")
     Mono<Image> getImageById(Long id);
+
+    // restore
+    @Override
+    @Post("/restore/album")
+    public Mono<HttpResponse<?>> restoreAlbum(@Body BackupAlbum backupAlbum);
+
+    @Override
+    @Post("/restore/image")
+    public Mono<HttpResponse<?>> restoreImage(@Body BackupImage backupImage);
+
+    @Override
+    @Post("/restore/album_image")
+    public Mono<HttpResponse<?>> restoreAlbumImage(@Body BackupAlbumImage backupAlbumImage);
 }

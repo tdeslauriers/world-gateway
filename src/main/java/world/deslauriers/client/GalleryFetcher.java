@@ -22,4 +22,11 @@ public interface GalleryFetcher {
     // backup
     Flux<Long> listImageIds();
     Mono<Image> getImageById(Long id);
+
+    // restore
+    Mono<HttpResponse<?>> restoreAlbum(BackupAlbum backupAlbum);
+
+    Mono<HttpResponse<?>> restoreImage(BackupImage backupImage);
+
+    Mono<HttpResponse<?>> restoreAlbumImage(BackupAlbumImage backupAlbumImage);
 }
