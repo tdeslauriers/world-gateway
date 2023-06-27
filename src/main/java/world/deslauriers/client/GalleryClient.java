@@ -3,9 +3,12 @@ package world.deslauriers.client;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
+import io.micronaut.security.annotation.Secured;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.model.gallery.*;
+
+import javax.validation.Valid;
 
 @Client(id = "gallery")
 public interface GalleryClient extends GalleryFetcher{
@@ -39,6 +42,14 @@ public interface GalleryClient extends GalleryFetcher{
     @Override
     @Get("/albums/{album}")
     Mono<AlbumDto> getAlbumByName(String album);
+
+    @Override
+    @Post
+    Mono<HttpResponse<Album>> saveAlbum(@Body @Valid Album album);
+
+    @Override
+    @Put
+    Mono<HttpResponse<?>> updateAlbum(@Body @Valid Album album);
 
     // backup
     @Override

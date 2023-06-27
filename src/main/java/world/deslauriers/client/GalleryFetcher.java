@@ -18,6 +18,8 @@ public interface GalleryFetcher {
     // albums
     Flux<Album> getAllAlbums();
     Mono<AlbumDto> getAlbumByName(String album);
+    Mono<HttpResponse<Album>> saveAlbum(Album album);
+    Mono<HttpResponse<?>> updateAlbum(Album album);
 
     // backup
     Flux<Long> listImageIds();
@@ -29,4 +31,5 @@ public interface GalleryFetcher {
     Mono<HttpResponse<?>> restoreImage(BackupImage backupImage);
 
     Mono<HttpResponse<?>> restoreAlbumImage(BackupAlbumImage backupAlbumImage);
+
 }
