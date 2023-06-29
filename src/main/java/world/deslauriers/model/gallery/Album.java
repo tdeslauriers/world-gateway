@@ -10,9 +10,17 @@ import java.util.Set;
 public record Album(
         Long id,
         @NotNull String album,
+
+        @Nullable String description,
+
         @Nullable Set<AlbumImage> albumImages
 ) {
+
+    public Album(Long id, String album, @Nullable String description) {
+        this(id, album, description, null);
+    }
+
     public Album(Long id, String album) {
-        this(id, album, null);
+        this(id, album, null, null);
     }
 }
