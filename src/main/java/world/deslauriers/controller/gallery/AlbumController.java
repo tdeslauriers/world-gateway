@@ -8,7 +8,7 @@ import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.GalleryFetcher;
 import world.deslauriers.model.gallery.Album;
-import world.deslauriers.model.gallery.AlbumDto;
+import world.deslauriers.model.gallery.Thumbnail;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -31,7 +31,7 @@ public class AlbumController {
 
     @Secured({"GALLERY_READ"})
     @Get("/{album}")
-    Mono<AlbumDto> getByAlbum(@Size(min = 2, max = 32) String album){
+    Flux<Thumbnail> getByAlbum(@Size(min = 2, max = 32) String album){
         return galleryFetcher.getAlbumByName(album);
     }
 

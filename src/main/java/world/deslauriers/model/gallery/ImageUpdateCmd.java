@@ -1,13 +1,15 @@
 package world.deslauriers.model.gallery;
 
-import io.micronaut.core.annotation.Nullable;
 import io.micronaut.serde.annotation.Serdeable;
+
+import java.util.Set;
 
 @Serdeable
 public record ImageUpdateCmd(
-        Long id,
+        String filename, // uuid
         String title,
         String description,
-        Boolean published
+        Boolean published,
+        Set<Album> albums
 ) {
 }

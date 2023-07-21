@@ -3,7 +3,6 @@ package world.deslauriers.client;
 import io.micronaut.http.HttpResponse;
 import io.micronaut.http.annotation.*;
 import io.micronaut.http.client.annotation.Client;
-import io.micronaut.security.annotation.Secured;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.model.gallery.*;
@@ -16,7 +15,7 @@ public interface GalleryClient extends GalleryFetcher{
     // images
     @Override
     @Get("/images/{filename}")
-    Mono<Image> getImageByFilename(String filename);
+    Mono<ImageDto> getImageByFilename(String filename);
 
     @Override
     @Get("/images/fullresolution/{filename}")
@@ -34,6 +33,10 @@ public interface GalleryClient extends GalleryFetcher{
     @Delete("/images/{filename}")
     Mono<HttpResponse> deleteImage(String filename);
 
+    @Override
+    @Put("/images/album_images/delete")
+    Mono<HttpResponse<?>> deleteAlbumImage(@Body AlbumImageDto cmd);
+
     // albums
     @Override
     @Get("/albums")
@@ -41,14 +44,14 @@ public interface GalleryClient extends GalleryFetcher{
 
     @Override
     @Get("/albums/{album}")
-    Mono<AlbumDto> getAlbumByName(String album);
+    Flux<Thumbnail> getAlbumByName(String album);
 
     @Override
-    @Post
+    @Post("/albums")
     Mono<HttpResponse<Album>> saveAlbum(@Body @Valid Album album);
 
     @Override
-    @Put
+    @Put("/albums")
     Mono<HttpResponse<?>> updateAlbum(@Body @Valid Album album);
 
     // backup
@@ -71,5 +74,5 @@ public interface GalleryClient extends GalleryFetcher{
 
     @Override
     @Post("/restore/album_image")
-    public Mono<HttpResponse<?>> restoreAlbumImage(@Body BackupAlbumImage backupAlbumImage);
+    public Mono<HttpResponse<?>> restoreAlbumImage(@Body AlbumImageDto backupAlbumImage);
 }

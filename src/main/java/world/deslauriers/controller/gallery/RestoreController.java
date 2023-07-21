@@ -8,7 +8,7 @@ import io.micronaut.security.annotation.Secured;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.GalleryFetcher;
 import world.deslauriers.model.gallery.BackupAlbum;
-import world.deslauriers.model.gallery.BackupAlbumImage;
+import world.deslauriers.model.gallery.AlbumImageDto;
 import world.deslauriers.model.gallery.BackupImage;
 
 @Secured({"COLD_STORAGE"})
@@ -32,7 +32,7 @@ public class RestoreController {
     }
 
     @Post("/album_image")
-    public Mono<HttpResponse<?>> restoreAlbumImage(@Body BackupAlbumImage backupAlbumImage){
+    public Mono<HttpResponse<?>> restoreAlbumImage(@Body AlbumImageDto backupAlbumImage){
         return galleryFetcher.restoreAlbumImage(backupAlbumImage);
     }
 }

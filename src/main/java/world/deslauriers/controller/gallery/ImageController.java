@@ -7,10 +7,7 @@ import io.micronaut.security.rules.SecurityRule;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 import world.deslauriers.client.GalleryFetcher;
-import world.deslauriers.model.gallery.FullResolutionDto;
-import world.deslauriers.model.gallery.Image;
-import world.deslauriers.model.gallery.ImageUpdateCmd;
-import world.deslauriers.model.gallery.Thumbnail;
+import world.deslauriers.model.gallery.*;
 
 import javax.validation.Valid;
 import javax.validation.constraints.Size;
@@ -27,7 +24,7 @@ public class ImageController {
 
     @Secured({"GALLERY_READ", "GALLERY_EDIT", "COLD_STORAGE"})
     @Get("/{filename}")
-    Mono<Image> getImage(String filename){
+    Mono<ImageDto> getImage(String filename){
         return galleryFetcher.getImageByFilename(filename);
     }
 
@@ -53,5 +50,11 @@ public class ImageController {
     @Delete("/{filename}")
     Mono<HttpResponse> delete(@Size(min = 2, max = 64) String filename){
         return galleryFetcher.deleteImage(filename);
+    }
+
+    @Secured({"GALLERY_EDIT"})
+    @Put("/album_images/delete")
+    public Mono<HttpResponse<?>> deleteAlbumImage(@Body @Valid AlbumImageDto cmd){
+        return galleryFetcher.deleteAlbumImage(cmd);
     }
 }

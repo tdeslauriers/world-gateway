@@ -8,13 +8,17 @@ import java.util.Set;
 
 @Serdeable
 public record Album(
-        Long id,
+        @Nullable Long id,
         @NotNull String album,
 
         @Nullable String description,
 
         @Nullable Set<AlbumImage> albumImages
 ) {
+
+    public Album(String album, @Nullable String description) {
+        this(null, album, description, null);
+    }
 
     public Album(Long id, String album, @Nullable String description) {
         this(id, album, description, null);
